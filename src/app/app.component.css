@@ -1,0 +1,20 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  background: rgba(64, 126, 181, 0.8);
+  color: white;
+}
+
+.toolbar_button{
+  font-size: 110%;
+}
+
+.logo{
+  font-size: 130%;
+}
