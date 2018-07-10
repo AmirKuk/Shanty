@@ -11,12 +11,29 @@ export class FindMeApartmentComponent implements OnInit {
   answer: string = '';
   answerDisplay: string = '';
   showSpinner: boolean = false;
+  username : string;
+  password : string;
+
+  checked : boolean = false;
+  disabled : boolean = false;
 
   constructor() { }
 
   ngOnInit() {
 
   }
+
+
+  login() : void {
+    if(this.username == 'admin' && this.password == 'admin'){
+      alert("valid credentials")
+    }else {
+      alert("Invalid credentials");
+    }
+  }
+
+
+
   showAnswer() {
     this.showSpinner = true;
 
