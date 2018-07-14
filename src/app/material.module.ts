@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatToolbarModule, MatInputModule,
          MatProgressSpinnerModule, MatCardModule ,MatSliderModule,
          MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
-         MatSidenavModule, MatOptionModule, MatSelectModule} from '@angular/material';
+         MatSidenavModule, MatOptionModule, MatSelectModule,
+         MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 
 @NgModule({
     imports: [MatButtonModule, MatToolbarModule, MatInputModule,
               MatProgressSpinnerModule, MatCardModule, MatSliderModule,
               MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
-              MatSidenavModule, MatOptionModule, MatSelectModule],
+              MatSidenavModule, MatOptionModule, MatSelectModule,
+              MatDatepickerModule, MatNativeDateModule],
     exports: [MatButtonModule, MatToolbarModule, MatInputModule,
               MatProgressSpinnerModule, MatCardModule, MatSliderModule,
               MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
-              MatSidenavModule, MatOptionModule, MatSelectModule]
+              MatSidenavModule, MatOptionModule, MatSelectModule,
+              MatDatepickerModule, MatNativeDateModule]
   })
 
 
