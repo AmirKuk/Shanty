@@ -1,17 +1,28 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+.demo-full-width {
+  width: 100%;
+  padding: 10px;
+}
+
+mat-card {
+  max-width: 850px;
+  margin: 2em auto;
+  text-align: center;
+}
 
 button{
   background: rgba(64, 126, 181, 0.8);
   color: white;
 }
 
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-h2 {
-  margin: 10px;
+.example-section2{
+  max-width: 56px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  padding: 16px;
 }
 
 .example-section {
@@ -19,89 +30,24 @@ button{
   align-content: center;
   align-items: center;
   height: 60px;
+  max-width: 174px;
+  padding: 16px;
 }
 
 .example-margin {
   margin: 10px;
 }
 
-
-.center{
-  width: 75%;
-  margin: 10px auto;
-}
-
-.main-div{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.app-body {
-  overflow: auto;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 64px;
-}
-
-.app-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.mat-card {
-  text-align: -webkit-center;
-}
-
-.demo-toolbar {
-  display: flex;
-  align-items: center;
+table {
   width: 100%;
 }
 
-.demo-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
 }
 
-.demo-full-width {
-  width: 100%;
-}
-
-.demo-full-width2 {
-  width: 93%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-}
-
-mat-card {
-  max-width: 80%;
-  margin: 2em auto;
-  text-align: center;
-}
-
-mat-toolbar-row {
+.example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
-}
-
-.done {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: white;
-}
-
-.content-center {
-  text-align: -webkit-center;
+  align-items: center;
 }

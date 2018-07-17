@@ -1,0 +1,32 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.demo-full-width {
+  width: 100%;
+}
+
+mat-card {
+  max-width: 850px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+button{
+  background: rgba(64, 126, 181, 0.8);
+  color: white;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 10px;
+}
+
+table {
+  width: 100%;
+}
+
