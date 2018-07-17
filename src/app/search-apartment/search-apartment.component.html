@@ -25,7 +25,7 @@
         </mat-form-field>
 
         <mat-form-field class="demo-full-width">
-          <mat-select placeholder="רחוב" [(value)]="selected" [formControl]="toppings" multiple>
+          <mat-select placeholder="רחוב" [formControl]="toppings" multiple>
             <mat-option *ngFor="let state of streets" [value]="state">{{state}}</mat-option>
           </mat-select>
         </mat-form-field>

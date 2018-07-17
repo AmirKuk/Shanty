@@ -11,7 +11,7 @@ export class FindMeApartmentComponent implements OnInit {
 
   contactForm : FormGroup;
   toppings = new FormControl();
-
+  panelOpenState: boolean;
   answer: string = '';
   answerDisplay: string = '';
   showSpinner: boolean = false;
