@@ -1,7 +1,7 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .demo-full-width {
-  width: 100%;
+  max-width: 100%;
 }
 
 mat-card {
@@ -20,6 +20,9 @@ button{
   align-content: center;
   align-items: center;
   height: 60px;
+  min-height: 20px;
+  margin: -10px;
+  margin-top: inherit;
 }
 
 .example-margin {
@@ -29,4 +32,5 @@ button{
 table {
   width: 100%;
 }
+
 

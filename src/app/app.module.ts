@@ -6,6 +6,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { MaterialModule } from './material.module';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
@@ -13,11 +14,16 @@ import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { LoginComponent } from './login/login.component';
+import { ApartmentInfoComponent } from './apartment-info/apartment-info.component';
 
 import { AuthGuardService } from "./auth/auth-guard.service";
 import { AuthService } from "./auth/auth.service";
+import { DataServService } from "./data-serv/data-serv.service"
 
-
+import 'hammerjs'; // <------ mandatory dependency for angular-modal-gallery
+import 'mousetrap'; // <------ mandatory dependency for angular-modal-gallery
+import { ModalGalleryModule } from '@ks89/angular-modal-gallery';
+import { PackagesComponent } from './packages/packages.component';
 
 
 
@@ -44,7 +50,9 @@ export function getAuthServiceConfigs() {
     AppComponent,
     RoutingComponents,
     ToolBarComponent,
-    LoginComponent
+    LoginComponent,
+    ApartmentInfoComponent,
+    PackagesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +63,9 @@ export function getAuthServiceConfigs() {
     ReactiveFormsModule,
     FlexLayoutModule,
     SocialLoginModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPayPalModule,
+    ModalGalleryModule.forRoot()
   ],
   providers: [
     {
@@ -63,7 +73,8 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     },
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    DataServService
   ],
   bootstrap: [AppComponent]
 })

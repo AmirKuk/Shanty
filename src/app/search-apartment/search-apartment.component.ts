@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { DataServService } from '../data-serv/data-serv.service';
+
 
 @Component({
   selector: 'app-search-apartment',
@@ -9,26 +11,21 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class SearchApartmentComponent implements OnInit {
 
-
+  objectKeys = Object.keys;
+  disabled : boolean = true;
   contactForm : FormGroup;
   toppings = new FormControl();
   toppings2 = new FormControl();
 
-  streets: string[] = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-  ];
+  streets: any;
+
+  ELEMENT_DATA: any;
 
   aprt_types: string[] = [
 "קרקע","קומות","לא משנה"
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dtserv: DataServService) {
     this.contactForm = fb.group({
       firstName: '',
       lastName: '',
@@ -37,12 +34,26 @@ export class SearchApartmentComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  getApartments(params){
+    this.dtserv.getApartments(params).subscribe(
+      data => {
+        this.ELEMENT_DATA = data;
+      }
+    );
+  }
+
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    this.getApartments({});
+    this.dtserv.getStreets().subscribe(
+      data => {
+        this.streets = data;
+      }
+    );
   }
 
 }
@@ -54,7 +65,7 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+/*const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -76,3 +87,4 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
 ];
+*/

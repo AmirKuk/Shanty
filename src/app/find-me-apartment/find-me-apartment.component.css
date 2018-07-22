@@ -11,6 +11,11 @@ mat-card {
   text-align: center;
 }
 
+.my-table-header{
+  text-align: center;
+}
+
+
 button{
   background: rgba(64, 126, 181, 0.8);
   color: white;
@@ -32,6 +37,7 @@ button{
   height: 60px;
   max-width: 174px;
   padding: 16px;
+  min-height: 20px;
 }
 
 .example-margin {
