@@ -3,6 +3,9 @@
 .demo-full-width {
   max-width: 100%;
 }
+.mat-elevation-z8 {
+  text-align: center;
+}
 
 mat-card {
   max-width: 850px;

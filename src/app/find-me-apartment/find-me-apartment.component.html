@@ -1,7 +1,8 @@
-<mat-card>
+<mat-card *ngIf="!searched">
+  <div [formGroup]="contactForm">
   <mat-accordion class="example-headers-align">
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="header-test">
         <mat-panel-title>
           איזה אזור?
         </mat-panel-title>
@@ -13,7 +14,7 @@
 
       <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
         <mat-form-field class="demo-full-width">
-          <mat-select placeholder="באר שבע" [disabled]="disabled">
+          <mat-select placeholder="באר שבע" formControlName="city" matTooltip="בקרוב בעוד ערים">
             <mat-option value="'באר שבע'"></mat-option>
             <mat-option *ngFor="let state of streets" [value]="state">
               {{state}}
@@ -22,7 +23,7 @@
         </mat-form-field>
 
         <mat-form-field class="demo-full-width">
-          <mat-select placeholder="שכונה" [disabled]="disabled">
+          <mat-select placeholder="שכונה" formControlName="neighborhood">
             <mat-option *ngFor="let state of streets" [value]="state">
               {{state}}
             </mat-option>
@@ -30,10 +31,18 @@
         </mat-form-field>
 
         <mat-form-field class="demo-full-width">
-          <mat-select placeholder="רחוב" [formControl]="toppings" multiple>
+          <mat-select placeholder="רחוב" formControlName="street" multiple>
             <mat-option *ngFor="let state of streets" [value]="state['name']">{{state['name']}}</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <!--mat-form-field class="example-full-width">
+          <input type="text" matInput placeholder="רחוב" formControlName="street" [matAutocomplete]="auto" multiple>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of streets" [value]="state['name']">{{state['name']}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field-->
+
       </div>
       <mat-action-row>
         <button mat-button color="primary" (click)="nextStep()">הבא</button>
@@ -41,7 +50,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="header-test">
         <mat-panel-title>
           קצת פרטים
         </mat-panel-title>
@@ -53,43 +62,39 @@
 
       <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
         <mat-form-field fxFlex>
-          <input matInput [matDatepicker]="picker" placeholder="זמן כניסה לדירה" [formControl]="enterDate">
+          <input matInput [matDatepicker]="picker" placeholder="זמן כניסה לדירה" formControlName="enter_date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field fxFlex>
-          <mat-select placeholder="סוג דירה" [formControl]="aprtType">
-            <mat-option *ngFor="let t of aprt_types" [value]="t" >
-              {{t}}
-            </mat-option>
-          </mat-select>
+          <input matInput type="number" placeholder="מס' קומה" formControlName="Floor">
         </mat-form-field>
       </div>
 
 
       <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
         <section class="example-section" fxFlex >
-          <mat-checkbox class="example-margin" [disabled]="disabled" value="before">עם בעלי חיים</mat-checkbox>
+          <mat-checkbox class="example-margin" matTooltip="בקרוב" formControlName="animals">עם בעלי חיים</mat-checkbox>
         </section>
 
         <section class="example-section" fxFlex>
-          <mat-checkbox class="example-margin" [disabled]="disabled"  value="before">מעלית</mat-checkbox>
+          <mat-checkbox class="example-margin" matTooltip="בקרוב" formControlName="alivator">מעלית</mat-checkbox>
         </section>
 
         <mat-form-field fxFlex>
-          <input matInput type="number" placeholder="גודל" [formControl]="size">
+          <input matInput type="number" placeholder="גודל" formControlName="Size">
         </mat-form-field>
 
       </div>
 
       <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
         <mat-form-field fxFlex>
-          <input matInput type="number" placeholder="מספר חדרים" [formControl]="rooms">
+          <input matInput type="number" placeholder="מספר חדרים" formControlName="Room_number">
         </mat-form-field>
 
         <mat-form-field fxFlex>
-          <input matInput type="number" placeholder="מחיר מקסימלי" [formControl]="price">
+          <input matInput type="number" placeholder="מחיר מקסימלי" formControlName="Price">
         </mat-form-field>
 
       </div>
@@ -101,7 +106,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="header-test">
         <mat-panel-title>
           איך נשמור על קשר?
         </mat-panel-title>
@@ -112,69 +117,184 @@
       </mat-expansion-panel-header>
       <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
         <section class="example-section" fxFlex>
-          <mat-checkbox class="example-margin"  value="site_alerts" [formControl]="site_alerts">התראות באתר</mat-checkbox>
+          <mat-checkbox class="example-margin"  value="site_alerts" formControlName="site_alerts">התראות באתר</mat-checkbox>
         </section>
 
         <div class="amir_test">
           <section class="example-section2" fxFlex>
-            <mat-checkbox [formControl]="sms_alerts">
+            <mat-checkbox formControlName="Enable_email">
             </mat-checkbox>
           </section>
           <mat-form-field fxFlex >
-            <input matInput  type="text"  placeholder="טלפון" [formControl]="sms">
+            <input matInput  type="text"  placeholder="טלפון" formControlName="Phone">
           </mat-form-field>
         </div>
         <div class="amir_test">
           <section class="example-section2" fxFlex>
-            <mat-checkbox [formControl]="email_alerts" value="ture">
+            <mat-checkbox formControlName="Enable_phone" value="ture">
             </mat-checkbox>
           </section>
           <mat-form-field fxFlex>
-            <input matInput  type="text"  placeholder="Email" value="{{user.email}}" [formControl]="email" disabled>
+            <input matInput  type="text"  placeholder="Email" value="{{user.email}}" formControlName="Email" disabled>
           </mat-form-field>
         </div>
       </div>
 
       <mat-action-row>
         <button mat-button color="warn" (click)="prevStep()">הקודם</button>
-        <button mat-button color="primary" (click)="submit()">יאללה חפש</button>
+        <button mat-button color="primary" (click)="submit()">{{sub_type}}</button>
       </mat-action-row>
     </mat-expansion-panel>
 
   </mat-accordion>
 
 
-  <mat-accordion class="example-headers-align">
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
+  <mat-accordion class="example-headers-align" >
+      <mat-expansion-panel  (opened)="setStep(4)" [expanded]="step === 4" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
             החיפושים שלי
           </mat-panel-title>
           <mat-panel-description>
-            {{panelOpenState ? 'הסתר' : 'הצג'}} את החיפושים שלי
+            {{step === 4 ? 'הסתר' : 'הצג'}} את החיפושים שלי
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <table mat-table [dataSource]="data" class="mat-elevation-z8">
-          <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-            <th mat-header-cell *matHeaderCellDef class="my-table-header"> {{column}} </th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngIf="column !='זמין' && column !='רחובות'">{{element[column]}}</div>
-              <mat-select placeholder="רחובות" *ngIf="column ==='רחובות'">
-                <mat-option *ngFor="let state of element[column]" [value]="state">{{state}}</mat-option>
-              </mat-select>
-              <mat-checkbox *ngIf="column==='זמין'" [(ngModel)]="element[column]"></mat-checkbox>
-            </td>
-          </ng-container>
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="data"  [class.isMobile]="isMobile">
+            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns2">
 
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-        </table>
+              <mat-header-cell *matHeaderCellDef class="my-table-header"> {{column}} </mat-header-cell>
 
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{column}}</span>
+                <div *ngIf="translate[column] !='active' &&
+                            translate[column] !='street' &&
+                            translate[column] !='edit'">{{element[translate[column]]}}</div>
+                <mat-select placeholder="רחובות" *ngIf="translate[column] ==='street'" style="text-align: right; max-width: 65px;">
+                  <mat-option *ngFor="let state of element[translate[column]]" [value]="state" disabled>{{state}}</mat-option>
+                </mat-select>
+                <mat-checkbox *ngIf="translate[column]==='active'" [checked]="element[translate[column]]"></mat-checkbox>
+                <button mat-button color="primary" style="text-align: right; padding: 0 !important;" *ngIf="translate[column]==='edit'" (click)="edit(element)">ערוך</button>
+                <button mat-button color="primary" style="text-align: right; padding: 0 !important;" *ngIf="translate[column]==='search'" (click)="search(element)">חפש</button>
+              </mat-cell>
+
+            </ng-container>
+
+            <mat-header-row  *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row  *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+          </mat-table>
+        </div>
 
       </mat-expansion-panel>
 
     </mat-accordion>
+  </div>
+
+
+</mat-card>
+<!-- search all data base -->
+
+<mat-card *ngIf="searched">
+  <!-- Title of an Card -->
+  <mat-card-title>
+    דירות שמתאימות בדיוק לך
+  </mat-card-title>
+
+  <mat-card-content>
+    <form fxLayout="column" [formGroup]="contactForm">
+
+      <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field class="demo-full-width">
+          <mat-select placeholder="באר שבע" formControlName="city" matTooltip="בקרוב בעוד ערים">
+            <mat-option *ngFor="let state of streets" [value]="state">
+              {{state}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="demo-full-width">
+          <mat-select placeholder="שכונה" formControlName="neighborhood">
+            <mat-option *ngFor="let state of streets" [value]="state['name']">
+              {{state}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="demo-full-width">
+          <mat-select placeholder="רחוב" formControlName="street" multiple>
+            <mat-option *ngFor="let state of streets" [value]="state['name']">{{state['name']}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="demo-full-width">
+          <input matInput [matDatepicker]="picker" placeholder="זמן כניסה לדירה" formControlName="enter_date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #picker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="input-row"  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+
+        <mat-form-field fxFlex>
+          <input matInput type="number" placeholder="מס' קומה" formControlName="Floor">
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input matInput type="number" placeholder="מספר חדרים" formControlName="Room_number">
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input matInput type="number" placeholder="מחיר מקסימלי" formControlName="Price">
+        </mat-form-field>
+
+      </div>
+
+      <div class="input-row"  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="10px">
+
+        <section class="example-section" fxFlex >
+          <mat-checkbox class="example-margin" matTooltip="בקרוב" formControlName="animals">עם בעלי חיים</mat-checkbox>
+        </section>
+
+        <section class="example-section" fxFlex>
+          <mat-checkbox class="example-margin" matTooltip="בקרוב" formControlName="alivator">מעלית</mat-checkbox>
+        </section>
+
+        <section class="example-section" fxFlex>
+          <mat-checkbox class="example-margin" formControlName="get_alerts">קבל התראות</mat-checkbox>
+        </section>
+
+        <button mat-button color="primary" (click)="submit()">{{sub_type}}</button>
+      </div>
+    </form>
+
+  </mat-card-content>
+  <mat-card-content>
+
+    <div class="mat-elevation-z8">
+      <mat-table [dataSource]="table_data"  [class.isMobile]="isMobile">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsData">
+
+          <mat-header-cell *matHeaderCellDef class="my-table-header"> {{column}} </mat-header-cell>
+
+          <mat-cell *matCellDef="let element">
+            <span class="mobile-label">{{column}}</span>
+            <div *ngIf="translate[column] != 'enter_date' ">{{element[translate[column]]}}</div>
+            <div *ngIf="translate[column] === 'enter_date' ">{{element[translate[column]] | date:'dd/MM/yyyy'}}</div>
+            <button mat-button color="primary" style="text-align: right; padding: 0 !important;" *ngIf="translate[column]==='edit'" (click)="edit(element)">ערוך</button>
+            <button mat-button color="primary" style="text-align: right; padding: 0 !important;" *ngIf="translate[column]==='search'" (click)="search(element)">חפש</button>
+          </mat-cell>
+
+        </ng-container>
+
+        <mat-header-row  *matHeaderRowDef="columnsToDisplayData"></mat-header-row>
+        <mat-row  *matRowDef="let row; columns: columnsToDisplayData;"></mat-row>
+      </mat-table>
+    </div>
+
+  </mat-card-content>
 
 </mat-card>

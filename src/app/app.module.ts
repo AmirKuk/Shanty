@@ -24,6 +24,7 @@ import 'hammerjs'; // <------ mandatory dependency for angular-modal-gallery
 import 'mousetrap'; // <------ mandatory dependency for angular-modal-gallery
 import { ModalGalleryModule } from '@ks89/angular-modal-gallery';
 import { PackagesComponent } from './packages/packages.component';
+import { DataTableComponent } from './data-table/data-table.component';
 
 
 
@@ -52,7 +53,8 @@ export function getAuthServiceConfigs() {
     ToolBarComponent,
     LoginComponent,
     ApartmentInfoComponent,
-    PackagesComponent
+    PackagesComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,

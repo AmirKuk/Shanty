@@ -5,16 +5,34 @@
   padding: 10px;
 }
 
+.header-test{
+  min-width: 270px;
+  height: 75px !important;
+}
+
 mat-card {
   max-width: 850px;
   margin: 2em auto;
   text-align: center;
 }
 
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  min-height: 20px;
+  margin: -10px;
+  margin-top: inherit;
+}
+
 .my-table-header{
   text-align: center;
 }
 
+.table_title{
+  color: black;
+}
 
 button{
   background: rgba(64, 126, 181, 0.8);
@@ -44,7 +62,7 @@ button{
   margin: 10px;
 }
 
-table {
+mat-table {
   width: 100%;
 }
 
@@ -57,3 +75,45 @@ table {
   justify-content: space-between;
   align-items: center;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 650px) {
+  .mobile-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+  mat-cell{
+    padding: 0 !important;
+  }
+
+  span{
+    text-align: right;
+  }
+}
+

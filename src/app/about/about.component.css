@@ -3,3 +3,37 @@ mat-card {
   margin: 2em auto;
   text-align: right;
 }
+
+
+.WrapShivokOdut2 {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 10px 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .WrapShivokOdut, .WrapShivokOdut1 {
+    display: block;
+    width: 98%;
+    margin: 10px auto;
+    box-sizing: border-box;
+  }
+  .logo{
+    display: none;
+  }
+
+}
+
+.WrapShivokOdut {
+  background-color: #eceeef;
+  padding: 20px;
+}
+.logo{
+  max-width: 310px;
+}
+
+.demo-full-width {
+  width: 100%;
+  padding: 10px;
+}

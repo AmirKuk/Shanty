@@ -1,30 +1,69 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { DataServService } from '../data-serv/data-serv.service'
 import { SocialUser, AuthService } from "angularx-social-login";
 
-export interface PeriodicElement {
-  עיר: string;
-  שכונה: string;
-  רחובות: string[];
-  זמין: boolean;
-  weight: number;
-  symbol: string;
-}
+const translate = {
+  'רחובות' :'street'     ,
+  'רחוב' :'street'     ,
+  'עיר': 'city',
+  'שכונה': 'neighborhood',
+  "כניסה":'enter_date' ,
+  "קומה":'Floor'      ,
+   "מייל":'Email'      ,
+   "טלפון":'Phone'      ,
+   "גודל":'Size'       ,
+   "מחיר":'Price'      ,
+   "חדרים":'Room_number',
+   "זמין" : "active",
+  "בעלי חיים":"animals",
+  "מעלית":"alivator",
+  "ערוך":"edit",
+  "תאריך":"date",
+  "חפש":"search"
+};
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {זמין: false, עיר: 'Hydrogen',   שכונה: 'Hydrogen',  רחובות: ['Hydrogen', 'Hydrogen' ], weight: 1.0079, symbol: 'H'},
-  {זמין: true , עיר: 'Helium',     שכונה: 'Helium',    רחובות: ['Helium',   'Helium'   ], weight: 4.0026, symbol: 'He'},
-  {זמין: false, עיר: 'Lithium',    שכונה: 'Lithium',   רחובות: ['Lithium',  'Lithium'  ], weight: 6.941, symbol: 'Li'},
-  {זמין: false, עיר: 'Beryllium',  שכונה: 'Beryllium', רחובות: ['Beryllium','Beryllium'], weight: 9.0122, symbol: 'Be'},
-  {זמין: true,  עיר: 'Boron',      שכונה: 'Boron',     רחובות: ['Boron',    'Boron'    ], weight: 10.811, symbol: 'B'},
-  {זמין: false, עיר: 'Carbon',     שכונה: 'Carbon',    רחובות: ['Carbon',   'Carbon'   ], weight: 12.0107, symbol: 'C'},
-  {זמין: false, עיר: 'Nitrogen',   שכונה: 'Nitrogen',  רחובות: ['Nitrogen', 'Nitrogen' ], weight: 14.0067, symbol: 'N'},
-  {זמין: false, עיר: 'Oxygen',     שכונה: 'Oxygen',    רחובות: ['Oxygen',   'Oxygen'   ], weight: 15.9994, symbol: 'O'},
-  {זמין: false, עיר: 'Fluorine',   שכונה: 'Fluorine',  רחובות: ['Fluorine', 'Fluorine' ], weight: 18.9984, symbol: 'F'},
-  {זמין: false, עיר: 'Neon',       שכונה: 'Neon',      רחובות: ['Neon',     'Neon'     ], weight: 20.1797, symbol: 'Ne'},
+const ELEMENT_DATA: any[] = [
+  {
+    '_id': "23213bdsewbssdfdbfdsfbfdsb",
+    'street': ["AA","BB"],
+    'neighborhood':"נחל עשן",
+    'city':"באר שבע",
+    'enter_date': "22/22/22",
+    'Floor': "קרקע",
+    'Email': "amr@mail.com",
+    'email_enable': true,
+    'phone': "0545054040",
+    'sms_enable': true,
+    'site_enable': false,
+    'size': 50,
+    'price': 1000,
+    'rooms': 5,
+    'active':true,
+    'date': new Date().toLocaleDateString()
+  },
+  {
+    '_id': "23213bdsewbssdfdbfdsfbfdsb",
+    'street': ["אבוחצירא","ריינס","ריינס","ריינס","ריינס"],
+    'neighborhood':"נחל עשן",
+    'city':"באר שבע",
+    'enter_date': "22/22/22",
+    'Floor': "קרקע",
+    'Email': "amr@mail.com",
+    'email_enable': true,
+    'phone': "0545054040",
+    'sms_enable': true,
+    'site_enable': false,
+    'size': 50,
+    'price': 1000,
+    'rooms': 5,
+    'active':true,
+    'date': new Date().toLocaleDateString()
+  }
 ];
+
+
 
 @Component({
   selector: 'app-find-me-apartment',
@@ -34,34 +73,24 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class FindMeApartmentComponent implements OnInit {
   user: SocialUser;
   contactForm : FormGroup;
-  toppings = new FormControl();
-  enterDate = new FormControl();
-  aprtType = new FormControl();
-  sms = new FormControl();
-  email = new FormControl();
-  site_alerts = new FormControl();
-  sms_alerts = new FormControl();
-  email_alerts = new FormControl();
-  price = new FormControl();
-  rooms = new FormControl();
-  size = new FormControl();
-  panelOpenState: boolean;
+  searched: boolean = false;
   checked : boolean = false;
   disabled : boolean = true;
-
-
+  sub_type: string = "יאללה חפש";
   search_re: any;
   streets: any;
 
-  aprt_types: string[] = [
-    "קרקע","קומות","לא משנה"
-  ];
-
-  displayedColumns: string[] = ['זמין', 'עיר', 'שכונה','רחובות','זמן כניסה','בעלי חיים','מעלית','מספר חדרים','מחיר מקסימלי', 'התראות באתר', 'טלפון', 'Email' ];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
-  data: PeriodicElement[] = ELEMENT_DATA;
-
+  table_data: any;
+  displayedColumnsData: string[] = ['עיר','רחוב','שכונה','חדרים','מחיר','גודל','מעלית','בעלי חיים','כניסה'];
+  displayedColumns: string[] = ['זמין', 'עיר', 'שכונה','רחובות','כניסה','גודל','בעלי חיים','מעלית','חדרים','מחיר', 'התראות באתר', 'טלפון', 'מייל',"ערוך" ];
+  displayedColumns2: string[] = ['זמין','תאריך','עיר','שכונה','רחובות','ערוך','חפש']
+  columnsToDisplay: string[] = this.displayedColumns2.slice();
+  columnsToDisplayData: string[] = this.displayedColumnsData.slice();
+  //data: any = ELEMENT_DATA;
+  data: any;
+  translate:any = translate;
   step = 0;
+
 
   setStep(index: number) {
     this.step = index;
@@ -77,30 +106,88 @@ export class FindMeApartmentComponent implements OnInit {
 
   //@ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fb: FormBuilder, private dtserv: DataServService, private authService: AuthService){
+  constructor(private fb: FormBuilder, private dtserv: DataServService, private authService: AuthService, private changeDetectorRefs: ChangeDetectorRef){ }
+
+  getSearches() {
+    this.dtserv.getSearches(this.user.id).subscribe(
+      data => {
+        this.data = data;
+        this.changeDetectorRefs.detectChanges();
+      }
+    );
   }
 
+  getApartments(params){
+    this.dtserv.getApartments(params).subscribe(
+      data => {
+        debugger
+        this.table_data = data;
+
+        this.changeDetectorRefs.detectChanges();
+        this.searched = true;
+      }
+    );
+  }
+
+  edit(data){
+    this.sub_type = "שמור";
+    this.setStep(0);
+    this.contactForm.patchValue(data);
+    this.changeDetectorRefs.detectChanges();
+
+  }
+
+  search(data){
+    this.contactForm.patchValue(data);
+    this.changeDetectorRefs.detectChanges();
+    this.searched = true;
+  }
 
   submit(){
-    this.search_re = {
-      'Street' : this.toppings.value,
-      'id' : this.user.id,
-      'enter_date' : this.enterDate.value,
-      'Floor' : this.aprtType.value,
-      'email' : this.user.email,
-      'email_enable' : this.email_alerts.value,
-      'phone' : this.sms.value,
-      'sms_enable' : this.sms_alerts.value,
-      'size' : this.size.value,
-      'site_enable': this.site_alerts.value,
-      'price': this.price.value,
-      'rooms': this.rooms.value
-    };
-    this.dtserv.postSeerch(this.search_re);
+    if (this.sub_type == "יאללה חפש") {
+      this.dtserv.postSeerch(this.contactForm.value).subscribe(
+        data => {
+          // refresh the list
+          this.getSearches();
+
+          this.getApartments({});
+          return true;
+        },
+        error => {
+          console.error("Error saving!");
+          console.log(error);
+
+          this.getApartments({});
+          return false;
+          //return Observable.throw(error);
+        });
+    }
+    else{
+      this.dtserv.putSeerch(this.search_re).subscribe(
+        data => {
+          // refresh the list
+          this.getSearches();
+
+          this.getApartments({});
+
+          return true;
+        },
+        error => {
+          console.error("Error saving!");
+          console.log(error);
+          //this.searched = true;
+
+          this.getApartments({});
+          return false;
+          //return Observable.throw(error);
+        }
+      );
+    }
   }
 
   ngOnInit() {
     //this.dataSource.paginator = this.paginator;
+    this.sub_type = "יאללה חפש"
     this.dtserv.getStreets().subscribe(
       data => {
         this.streets = data;
@@ -109,6 +196,26 @@ export class FindMeApartmentComponent implements OnInit {
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
+      this.getSearches()
+    });
+
+    this.contactForm = this.fb.group({
+      _id:[""],
+      Phone:[""],
+      Email:[""],
+      enter_date:[""],
+      city:[{value:"באר שבע",disabled:true}],
+      neighborhood:[{value:"",disabled:true}],
+      street:[""],
+      Floor:[""],
+      site_alerts:[true],
+      Enable_phone: [true],
+      Enable_email: [true],
+      Price: [""],
+      Room_number: [""],
+      Size: [""],
+      animals:[{value:null,disabled:true}],
+      alivator:[{value:null,disabled:true}]
     });
   }
 }

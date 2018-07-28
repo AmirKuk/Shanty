@@ -1,7 +1,63 @@
+
 <mat-card>
-  Shanty פועלת במשק הישראלי וכבר בדרכה למשק הבינלאומי.
-  החברה השיקה פלטפורמה מהפכנית שמתמחה במציאת דירות להשכרה או קנייה ע"פ מאפיינים אותם הלקוח בוחר מראש. כאשר המערכת מזהה דירה העונה על צרכי המשתמש היא מספקת לו התראה בזמן אמת עם דיווח עבור הדירה הרלוונטית.
-  הפלטפורמה בעלת מאגר נכסים מעודכן מכלל הרשתות החברתיות,מאגרי נכסים ציבוריים ושיתופי פעולה פרטיים בתחום.
-  שוכרים,בעלי נכסים,משקיעים ומתווכים נהנים מהפלטפורמה אשר מספקת מידע ייחודי בצורה הפשוטה, היעילה והמהירה ביותר - כך אנו מקדמים את לקוחותינו להשלמת העסקה המתאימה עבורם.
-  החברה כרגע הושקה בעיר באר שבע ובמהרה תפתח את שלל האפשרויות המדהימות הטמונות בה.
+
+  <div class="WrapShivokOdut2">
+    <div class="WrapShivokOdut">
+      <div class="ShivokOdutPic1">
+        <img border="0" class="logo" align="left" src="assets\Final1_transparent.png">
+      </div>
+      <span style="font-size: 18pt;"><strong>מה זה Shanty?</strong></span>
+      <br><br><span style="font-size: 18pt;"> Shanty פועלת במשק הישראלי וכבר בדרכה למשק הבינלאומי.</span><br>
+      <br>
+      <div style="font-size: 13.3333px; 13.3333px;">
+      </div>
+      <div style="font-size: 13.3333px; 13.3333px;">
+        <span style="font-size: 12pt;">
+            הפלטפורמה בעלת מאגר נכסים מעודכן מכלל הרשתות החברתיות,מאגרי נכסים ציבוריים ושיתופי פעולה פרטיים בתחום.
+    שוכרים,בעלי נכסים,משקיעים ומתווכים נהנים מהפלטפורמה אשר מספקת מידע ייחודי בצורה הפשוטה, היעילה והמהירה ביותר - כך אנו מקדמים את לקוחותינו להשלמת העסקה המתאימה עבורם.
+    החברה כרגע הושקה בעיר באר שבע ובמהרה תפתח את שלל האפשרויות המדהימות הטמונות בה.
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="WrapShivokOdut2">
+    <div class="WrapShivokOdut">
+      <span style="font-size: 18pt;"><strong>צרו איתנו קשר!</strong></span>
+      <br>
+      <span style="font-size: 12pt;">נשמח לענות על כל שאלה
+      </span>
+      <form fxLayout="column" [formGroup]="contactForm">
+
+
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+          <mat-form-field class="demo-full-width">
+            <input matInput type="text" placeholder="שם" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="demo-full-width">
+            <input matInput type="text" placeholder="Email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field class="demo-full-width">
+            <input matInput type="text" placeholder="נושא" formControlName="title">
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="input-row">
+
+          <mat-form-field fxFlex>
+            <textarea matInput placeholder="הודעה" formControlName="content" rows="14"> </textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="input-row">
+          <button mat-button color="primary" style="width:100%;" (click)="submit()">שלח</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
 </mat-card>

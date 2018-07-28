@@ -6,7 +6,8 @@ import {
   MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
   MatSidenavModule, MatOptionModule, MatSelectModule,
   MatDatepickerModule, MatNativeDateModule, MatTableModule,
-  MatPaginatorModule, MatExpansionModule, MatIconModule
+  MatPaginatorModule, MatExpansionModule, MatIconModule,
+  MatTooltipModule, MatAutocompleteModule
       } from '@angular/material';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {
       MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
       MatSidenavModule, MatOptionModule, MatSelectModule,
       MatDatepickerModule, MatNativeDateModule, MatTableModule,
-      MatPaginatorModule, MatExpansionModule, MatIconModule
+      MatPaginatorModule, MatExpansionModule, MatIconModule,
+      MatTooltipModule, MatAutocompleteModule
     ],
     exports: [
       MatButtonModule, MatToolbarModule, MatInputModule,
@@ -24,7 +26,8 @@ import {
       MatSlideToggleModule, MatRadioModule, MatCheckboxModule,
       MatSidenavModule, MatOptionModule, MatSelectModule,
       MatDatepickerModule, MatNativeDateModule, MatTableModule,
-      MatPaginatorModule, MatExpansionModule, MatIconModule
+      MatPaginatorModule, MatExpansionModule, MatIconModule,
+      MatTooltipModule, MatAutocompleteModule
     ]
   })
 
