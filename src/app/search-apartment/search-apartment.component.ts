@@ -38,7 +38,7 @@ export class SearchApartmentComponent implements OnInit {
   table_data: any = ELEMENT_DATA;
 
   aprt_types: string[] = [
-"קרקע","קומות","לא משנה"
+"קרקע","קומות","גמיש"
   ];
 
   constructor(private fb: FormBuilder, private dtserv: DataServService) {

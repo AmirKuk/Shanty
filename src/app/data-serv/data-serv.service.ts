@@ -18,15 +18,20 @@ export class DataServService {
     return this.http.get(apiserver+'/streets');
   }
 
+  getNeighborhoods() {
+    return this.http.get(apiserver+'/neighborhoods');
+  }
+
   getApartments(params) {
-    var params_new = "";
+    /*var params_new = "";
 
     for (var k in Object.keys(params)){
+
       params_new += "?"+ Object.keys(params)[k] + "=" + params[Object.keys(params)[k]];
-    }
+    }*/
 
-
-    return this.http.get(apiserver+'/Apartments'+params_new);
+    //return this.http.get(apiserver+'/Apartments'+params_new);
+    return this.http.post(apiserver+'/Apartments',params,{ responseType: 'json' });
   }
 
   getSearches(params) {
@@ -38,6 +43,7 @@ export class DataServService {
   }
 
   postSeerch(params){
+    delete params["_id"];
     return this.http.post(apiserver+'/searches',params,{ responseType: 'text' })
   }
 
@@ -47,5 +53,17 @@ export class DataServService {
 
   postConnectus(params){
     return this.http.post(apiserver+'/Connectus',params,{ responseType: 'text' })
+  }
+
+  postPackage(params){
+    return this.http.post(apiserver+'/package',params,{ responseType: 'text' })
+  }
+
+  postTrial(params){
+    return this.http.post(apiserver+'/Trial',params,{ responseType: 'text' })
+  }
+
+  getPackage(params){
+    return this.http.get(apiserver+'/package?id='+params)
   }
 }

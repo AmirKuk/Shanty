@@ -1,5 +1,39 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+.searchber {
+  background: #dfe8f5;
+  flex-wrap: wrap;
+  border-radius: 25px;
+}
+
+.searchber mat-form-field{
+  /*width: 100px;*/
+  width: 10vmax;
+  max-width: 65px;
+  font-size: smaller;
+  margin: 10px;
+}
+
+.symbole{
+  padding-top: 2vh;
+}
+
+.type{
+  display: flow-root !important;
+}
+
+.searchber div{
+  background: #f5faff;
+  border: 2px;
+  padding: 5px;
+  border-radius: 25px;
+  margin: 10px;
+}
+
+.search{
+  background: #8f8fff !important;
+}
+
 .demo-full-width {
   width: 100%;
   padding: 10px;
@@ -11,10 +45,11 @@
 }
 
 mat-card {
-  max-width: 850px;
+  max-width: 1350px;
   margin: 2em auto;
   text-align: center;
 }
+
 
 .example-section {
   display: flex;
@@ -22,7 +57,6 @@ mat-card {
   align-items: center;
   height: 60px;
   min-height: 20px;
-  margin: -10px;
   margin-top: inherit;
 }
 
@@ -46,16 +80,6 @@ button{
   align-items: center;
   height: 60px;
   padding: 16px;
-}
-
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
-  max-width: 174px;
-  padding: 16px;
-  min-height: 20px;
 }
 
 .example-margin {
@@ -92,11 +116,31 @@ mat-table {
   display: none;
 }
 
+.date_picker{
+  min-width: 90px !important;
+}
+
 @media(max-width: 650px) {
+
+  .mat-card-content{
+    margin:20px;
+  }
+
+  .symbole{
+    padding-top: 3vh;
+  }
+
+  .searchber{
+    margin: -10px;
+  }
   .mobile-label {
     width: 80px;
     display: inline-block;
     font-weight: bold;
+  }
+
+  .searchber div{
+    /*width:290px;*/
   }
 
   .mat-header-row {
@@ -108,12 +152,17 @@ mat-table {
     align-items: start;
     padding: 8px 24px;
   }
+
   mat-cell{
     padding: 0 !important;
   }
 
   span{
     text-align: right;
+  }
+
+  .date_picker{
+    min-width: 90px !important;
   }
 }
 
