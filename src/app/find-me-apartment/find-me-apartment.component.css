@@ -7,31 +7,39 @@
 }
 
 .searchber mat-form-field{
-  /*width: 100px;*/
-  width: 10vmax;
+  /*width: 100px;
+  width: 10vmax;*/
   max-width: 65px;
   font-size: smaller;
   margin: 10px;
 }
 
-.symbole{
-  padding-top: 2vh;
-}
-
-.type{
-  display: flow-root !important;
-}
-
-.searchber div{
+.searchber .data{
   background: #f5faff;
   border: 2px;
   padding: 5px;
   border-radius: 25px;
   margin: 10px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.symbole{
+  padding-top: 22px;
+}
+
+.type{
+  display: flow-root !important;
+
 }
 
 .search{
   background: #8f8fff !important;
+}
+
+.right{
+  margin-right: 90%;
 }
 
 .demo-full-width {
@@ -45,9 +53,18 @@
 }
 
 mat-card {
-  max-width: 1350px;
-  margin: 2em auto;
+  max-width: 1050px;
+  /*margin: 2em auto;*/
+  margin-top: 25px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  padding: 1px;
+}
+
+.mat-card>.mat-card-actions:last-child {
+  margin-bottom: auto;
 }
 
 
@@ -117,30 +134,30 @@ mat-table {
 }
 
 .date_picker{
-  min-width: 90px !important;
+  /*min-width: 90px !important;*/
 }
 
 @media(max-width: 650px) {
-
-  .mat-card-content{
-    margin:20px;
+  mat-card{
+    margin: 20px;
   }
 
-  .symbole{
-    padding-top: 3vh;
+  .type mat-form-field{
+    min-width: 90% !important;
+  }
+
+  .mat-card-content{
+    /*margin:20px;*/
   }
 
   .searchber{
-    margin: -10px;
+    /*margin: 15px;*/
   }
+
   .mobile-label {
     width: 80px;
     display: inline-block;
     font-weight: bold;
-  }
-
-  .searchber div{
-    /*width:290px;*/
   }
 
   .mat-header-row {
@@ -163,6 +180,11 @@ mat-table {
 
   .date_picker{
     min-width: 90px !important;
+  }
+
+
+  .right{
+    margin-right: 80%;
   }
 }
 

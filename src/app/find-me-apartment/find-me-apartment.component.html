@@ -1,11 +1,11 @@
-<mat-card>
+<mat-card class="searchber">
   <!-- Title of an Card -->
   <mat-card-title>
   </mat-card-title>
-  <mat-card-content  [formGroup]="contactForm">
-    <div fxLayout class="searchber">
+  <mat-card-content [formGroup]="contactForm">
 
-      <div class="price" fxLayout="row">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div class="price data" fxLayout="row">
         <span class="symbole" style="font-size: x-large;padding-top: 20px;">₪</span>
         <mat-form-field>
           <input matInput type="number" placeholder="ממחיר" formControlName="Price_min" step="10">
@@ -16,7 +16,7 @@
         </mat-form-field>
       </div>
 
-      <div class="rooms" fxLayout="row">
+      <div class="rooms data" fxLayout="row">
         <mat-icon class="symbole">meeting_room</mat-icon>
         <mat-form-field>
           <input matInput type="number" formControlName="Room_number_min" placeholder="מחדרים" matTooltip="מס' חדרים מינימלי" step="10">
@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
 
-      <div class="area" fxLayout="row">
+      <div class="area data" fxLayout="row">
         <mat-icon class="symbole">home</mat-icon>
         <mat-form-field>
           <mat-select formControlName="city" placeholder="עיר" matTooltip="בקרוב בעוד ערים" formControlName="city">
@@ -52,32 +52,43 @@
 
       </div>
 
-      <div class="type" fxLayout="row">
+      <div class="type data" style="padding-left: 10px;" fxLayout="row">
         <mat-form-field>
           <mat-select formControlName="Type" placeholder="סוג">
             <mat-option *ngFor="let state of aprt_type" [value]="state">
-              {{state}}
+              {{translate[state]}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <!--mat-radio-group formControlName="Type">
+          <mat-radio-button *ngFor="let state of aprt_type" [value]="state" style="padding-left: 5px;">{{translate[state]}}</mat-radio-button>
+        </mat-radio-group -->
       </div>
 
-
-      <div fxLayout="row" *ngIf="more_options">
+    <mat-card-content>
+      <div class="more data" fxLayout="column" style="margin: 10px; height: auto !important;">
+        <button mat-button class="mat-primary" style="padding: 20px; width: 100% !important; max-width: 300px; border-radius: 25px;" (click)="more()">
+          {{show}}           אפשרויות מתקדמות
+        </button>
+      </div>
+    </mat-card-content>
+    </div>
+    <div *ngIf="more_options" fxLayout="row" fxLayout.lt-md="column">
+      <div fxLayout="row" class="data">
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker1" placeholder="מ ת. כניסה" formControlName="enter_date_min">
+          <input matInput [matDatepicker]="picker1" placeholder="מכניסה לדירה" formControlName="enter_date_min">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker1></mat-datepicker>
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker2" placeholder="מ ת. כניסה" formControlName="enter_date_max">
+          <input matInput [matDatepicker]="picker2" placeholder="עד כניסה לדירה" formControlName="enter_date_max">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker2></mat-datepicker>
         </mat-form-field>
       </div>
 
-      <div fxLayout="row" style="padding: 35px;" *ngIf="more_options">
+      <div fxLayout="row" class="data" style="padding: 30px;" *ngIf="more_options">
         <mat-radio-group formControlName="Ground">
           <mat-radio-button style="padding-left: 5px;" value="false">קומות</mat-radio-button>
           <mat-radio-button style="padding-left: 5px;" value="true">קרקע</mat-radio-button>
@@ -85,7 +96,7 @@
         </mat-radio-group>
       </div>
 
-      <div class="price" fxLayout="row" *ngIf="more_options">
+      <div class="price data" fxLayout="row" *ngIf="more_options">
         <mat-form-field>
           <input matInput type="number" formControlName="Size_min" placeholder="מגודל" step="5">
         </mat-form-field>
@@ -95,7 +106,7 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="row" *ngIf="more_options">
+      <div fxLayout="row" class="data" *ngIf="more_options">
         <section class="example-section" fxFlex>
           <mat-checkbox class="example-margin" matTooltip="בקרוב" formControlName="alivator">מעלית</mat-checkbox>
         </section>
@@ -104,32 +115,32 @@
         </section>
       </div>
 
-      <div class="more" fxLayout="column">
-        <button mat-button style="padding: 20px;outline: none;" (click)="more()">
-{{show}}           אפשרויות מתקדמות
-        </button>
-      </div>
-      <div class="search">
-        <button mat-button style="padding: 20px; outline: none;" (click)="getAlerts()">
-          <mat-icon>notifications_active</mat-icon>
-        </button>
-      </div>
-
-      <div class="search">
-        <button mat-button style="padding: 20px; outline: none;" (click)="search()" HREF="#codeword">
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
     </div>
   </mat-card-content>
 
-  <mat-card-content>
-
-    <div class="mat-elevation-z8" NAME="codeword">
-      <div *ngFor="let element of table_data">
-        <app-apartment-info [aprtData]="element"> </app-apartment-info>
-      </div>
+  <mat-card-actions style="display: inline-flex;">
+    <div class="search data" style="margin: 10px;">
+      <button mat-button style="padding: 20px; outline: none;" (click)="getAlerts()">
+        <mat-icon>notifications_active</mat-icon>
+      </button>
     </div>
-  </mat-card-content>
 
+    <div class="search data" style="margin: 10px;">
+      <button mat-button style="padding: 20px;" (click)="search()" [ngx-scroll-to]="'res'">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
 </mat-card>
+<div  id="res">
+  <div *ngFor="let element of table_data">
+    <app-apartment-info [aprtData]="element"> </app-apartment-info>
+  </div>
+  <div *ngIf="table_data.length == 0" style="text-align: center;
+    padding-top: 10vh;
+    font-size: 7vh;">
+    <span>
+      לא נמצאו תוצאות :(
+    </span>
+  </div>
+</div>

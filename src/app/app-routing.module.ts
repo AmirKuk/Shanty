@@ -7,18 +7,18 @@ import { ApartmentInfoComponent } from './apartment-info/apartment-info.componen
 import { LoginComponent } from './login/login.component';
 import { PackagesComponent } from './packages/packages.component';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
-import {AlertsComponent} from './alerts/alerts.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'find_me_apartment', component: FindMeApartmentComponent},
-  { path: 'about', component: AboutComponent},
-  { path: 'search_apartment/:id', component: ApartmentInfoComponent },
-  { path: 'search_apartment', component: SearchApartmentComponent},
-  { path: 'packages', component: PackagesComponent },
+  { path: 'find_me_apartment', component: FindMeApartmentComponent, canActivate:[AuthGuard]},
+  { path: 'about', component: AboutComponent, canActivate:[AuthGuard]},
+  { path: 'search_apartment/:id', component: ApartmentInfoComponent, canActivate:[AuthGuard] },
+  //{ path: 'search_apartment', component: SearchApartmentComponent},
+  { path: 'packages', component: PackagesComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'login/:url', component: LoginComponent},
-  { path: 'alerts', component: AlertsComponent},
+  { path: 'alerts', component: AlertsComponent, canActivate:[AuthGuard]},
   { path: 'wsdfL32432d_giUgyJ9vTQioNhnhDy32adasdasfrevgtbvdfllofkmkdddsafdslmfsdf42342_DSfsfsdsaj32423d24rfdiow4dsfsdfdddddddddddsdfsdf43st6646m6p694j06j468jojerlsjtsjdflisdfhjdslkfnw4ksjdfnldsjfldskjfdslkfnsducndsjlcnsdldjfnsdjlncjudsljcndsjlcnsdjlcnsdjlncsdjlncljsdncljdsncsdofslkdfmdslkfjdslkfdddddddddddddddddsvdscsdfsdfdssddsfdsfdsfsdfewwe',
     redirectTo: '/login/wsdfL32432d_giUgyJ9vTQioNhnhDy32adasdasfrevgtbvdfllofkmkdddsafdslmfsdf42342_DSfsfsdsaj32423d24rfdiow4dsfsdfdddddddddddsdfsdf43st6646m6p694j06j468jojerlsjtsjdflisdfhjdslkfnw4ksjdfnldsjfldskjfdslkfnsducndsjlcnsdldjfnsdjlncjudsljcndsjlcnsdjlcnsdjlncsdjlncljsdncljdsncsdofslkdfmdslkfjdslkfdddddddddddddddddsvdscsdfsdfdssddsfdsfdsfsdfewwe'},
   { path: '**', redirectTo: '/login' }

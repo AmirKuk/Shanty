@@ -5,6 +5,7 @@ import { SocialUser, AuthService } from "angularx-social-login";
 import { Router } from '@angular/router';
 import { DialogComponent } from '../dialog/dialog.component';
 import { GetAlertsComponent } from '../get-alerts/get-alerts.component';
+import { MoreOptionsComponent } from '../more-options/more-options.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 const translate = {
@@ -26,6 +27,10 @@ const translate = {
   "תאריך":"date",
   "סוג":"Type",
   "חפש":"search",
+  "All": "הכל",
+  "Rent": "ללא שותפים",
+  "Mates": "שותפים",
+  "sablet": "סבלט",
   "Package has been expired":"החבילה פגה תוקף קנה חבילה חדשה",
   "Search already exists": "החיפוש כבר קיים",
   "You have reached your search limit":"עברתה את כמות החיפושים האפשריים",
@@ -45,23 +50,29 @@ export class FindMeApartmentComponent implements OnInit {
   streets: any;
   all_streets: any;
   neighborhoods:any;
+  show:string = "הצג";
+  more_options: boolean = false;
 
-  aprt_type:string[]=["הכל","ללא שותפים","שותפים","סבלט"];
+  aprt_type:string[]=["All","Rent","Mates","sablet"];
   citys:string[] = ['באר שבע'];
   objectKeys = Object.keys;
   get_alerts = true;
 
-  table_data: any;
+  table_data: any = [];
 
-  more_options:boolean = false;
-  show:string = "הצג";
-
-  /*
-  displayedColumnsData: string[] = ['עיר','רחוב','שכונה','חדרים','מחיר','גודל','מעלית','בעלי חיים','כניסה'];
-  displayedColumns2: string[] = ['זמין','תאריך','עיר','רחובות','ערוך','חפש']
-  */
 
   constructor(private router: Router, private fb: FormBuilder, private dtserv: DataServService, private authService: AuthService, public dialog: MatDialog){ }
+
+  more2(): void {
+    const dialogRef = this.dialog.open(MoreOptionsComponent, {
+      width: '300px',
+      data: this.contactForm.value
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.contactForm.patchValue(result);
+    });
+  }
 
   more(){
     this.more_options = !this.more_options;
@@ -70,10 +81,6 @@ export class FindMeApartmentComponent implements OnInit {
     } else{
       this.show = "הצג";
     }
-  }
-
-  fun(){
-    alert("dsada");
   }
 
   openDialog(data): void {
@@ -89,7 +96,7 @@ export class FindMeApartmentComponent implements OnInit {
 
   openGetAlerts(data): void {
     const dialogRef = this.dialog.open(GetAlertsComponent, {
-      width: '700px',
+      width: '300px',
       data: data
     });
 
@@ -293,19 +300,19 @@ export class FindMeApartmentComponent implements OnInit {
       _id:[""],
       Active:[true],
       is_deleted:[false],
-      enter_date_min:[""],
-      enter_date_max:[""],
       city:['באר שבע'],
       Neighborhood:[""],
       Street:[""],
-      Ground:[""],
-      Price_min: [""],
-      Price_max: [""],
       Room_number_min: [""],
       Room_number_max: [""],
+      Price_min: [""],
+      Price_max: [""],
+      Type: [""],
+      Ground:[""],
+      enter_date_min:[""],
+      enter_date_max:[""],
       Size_min: [""],
       Size_max: [""],
-      Type: [""],
       animals:[{value:null,disabled:true}],
       alivator:[{value:null,disabled:true}]
     });

@@ -9,11 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgxGalleryModule } from 'ngx-gallery';
-
-//import { PopupModule } from 'ng2-opd-popup'
-
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
@@ -24,6 +23,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertsRowComponent } from './alerts-row/alerts-row.component';
 import { GetAlertsComponent } from './get-alerts/get-alerts.component';
+import { MoreOptionsComponent } from './more-options/more-options.component';
 
 import { AuthGuardService } from "./auth/auth-guard.service";
 import { AuthService } from "./auth/auth.service";
@@ -32,9 +32,6 @@ import { DataServService } from "./data-serv/data-serv.service"
 import 'hammerjs'; // <------ mandatory dependency for angular-modal-gallery
 import 'mousetrap'; // <------ mandatory dependency for angular-modal-gallery
 import { ModalGalleryModule } from '@ks89/angular-modal-gallery';
-
-
-
 
 
 
@@ -68,7 +65,8 @@ export function getAuthServiceConfigs() {
     GetAlertsComponent,
     AlertsComponent,
     AlertsRowComponent,
-    GetAlertsComponent
+    GetAlertsComponent,
+    MoreOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +81,9 @@ export function getAuthServiceConfigs() {
     NgxPayPalModule,
     NgxGalleryModule,
     NouisliderModule,
-    ModalGalleryModule.forRoot()
+    ClipboardModule,
+    ModalGalleryModule.forRoot(),
+    ScrollToModule.forRoot()
   ],
   providers: [
     {
@@ -94,7 +94,7 @@ export function getAuthServiceConfigs() {
     AuthGuardService,
     DataServService
   ],
-  entryComponents: [DialogComponent,GetAlertsComponent],
+  entryComponents: [DialogComponent, GetAlertsComponent, MoreOptionsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
