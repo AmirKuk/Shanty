@@ -1,0 +1,47 @@
+mat-card div *{
+  /*width: 13vw;*/
+  max-width: 100px;
+}
+
+.searchber {
+  background: #dfe8f5;
+  flex-wrap: wrap;
+  border-radius: 25px;
+}
+
+.searchber mat-form-field{
+  /*width: 100px;*/
+  width: 10vmax;
+  max-width: 65px;
+  font-size: smaller;
+  margin: 10px;
+}
+
+.symbole{
+  padding-top: 2vh;
+}
+
+.type{
+  display: flow-root !important;
+}
+
+.searchber div{
+  background: #f5faff;
+  border: 2px;
+  padding: 5px;
+  border-radius: 25px;
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  min-height: 20px;
+  margin-top: inherit;
+}
+
+.example-margin {
+  margin: 10px;
+}

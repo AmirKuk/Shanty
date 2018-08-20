@@ -1,0 +1,86 @@
+<mat-card>
+  <mat-radio-group class="example-radio-group" [(ngModel)]="finalAmount">
+  <div class="container">
+    <div class="pricing-grid agileits-shadow left">
+      <div class="w3ls-main">
+        <div id="cube" class="show-front">
+          <figure class="top"> </figure>
+        </div>
+      </div>
+      <div class="agileinfo-price">
+        <h3>חבילת Basic</h3>
+      </div>
+      <div class="price-bg">
+        <p class="price-label-1">
+            ₪<span>30</span><i style="text-decoration: line-through;"> ₪40</i>
+        </p>
+        <!--button mat-button class="moreddata" (click)="more(0)"><mat-icon>more_horiz</mat-icon></button-->
+        <ul class="count" [ngClass]="{'mdata': more_options[0]}">
+          <li> עדכונים בזמן אמת עבור חיפוש אחד </li>
+          <li>קבלת התראות באמצעות מיילים</li>
+          <li>תוקף החבילות הינו שבועיים</li>
+        </ul>
+        <div class="buy">
+          <mat-radio-button class="example-radio-button" [value]=30>
+          </mat-radio-button>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-grid agileits-shadow middle">
+        <div class="w3ls-main">
+          <div id="cube" class="show-front">
+            <figure class="top"> </figure>
+          </div>
+        </div>
+        <div class="agileinfo-price ">
+          <h3>חבילת Premium</h3>
+        </div>
+        <div class="price-bg">
+          <p class="price-label-1"> ₪<span>60</span> </p>
+          <!--button mat-button class="moreddata" (click)="more(1)"><mat-icon>more_horiz</mat-icon></button-->
+          <ul class="count" [ngClass]="{'mdata': more_options[1]}">
+            <li> עדכונים בזמן אמת עבור 3 חיפושים</li>
+            <li> קבלת התראות באמצעות מיילים וSMSים</li>
+            <li> תוקף החבילות הינו 30 יום</li>
+          </ul>
+          <div class="buy">
+            <mat-radio-button class="example-radio-button" [value]=60>
+            </mat-radio-button>
+          </div>
+        </div>
+      </div>
+    <div class="pricing-grid agileits-shadow right">
+      <div class="w3ls-main">
+        <div id="cube" class="show-front">
+          <figure class="top"> </figure>
+        </div>
+      </div>
+      <div class="agileinfo-price ">
+        <h3>חבילת Expert</h3>
+        <!--h5>עדכונים בזמן אמת עבור 5 חיפושים</h5-->
+      </div>
+      <div class="price-bg">
+        <p class="price-label-1"> ₪<span>80</span> </p>
+        <!--button mat-button class="moreddata" (click)="more(2)"><mat-icon>more_horiz</mat-icon></button-->
+        <ul class="count" [ngClass]="{'mdata': more_options[2]}">
+          <li> עדכונים בזמן אמת עבור 5 חיפושים</li>
+          <li> קבלת התראות באמצעות מיילים וSMSים </li>
+          <li> תוקף החבילות הינו 90 יום</li>
+        </ul>
+        <div class="buy">
+          <mat-radio-button class="example-radio-button" [value]=80>
+          </mat-radio-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </mat-radio-group>
+
+  <div style="text-align:center; margin:0 auto;">
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    <p>תשלום מאובטח ב-PayPal באמצעות כרטיס אשראי</p>
+    <img src="assets\paypal.png" class="paypal_card">
+
+  </div>
+
+</mat-card>

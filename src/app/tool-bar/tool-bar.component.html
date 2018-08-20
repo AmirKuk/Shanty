@@ -1,0 +1,132 @@
+<!---->
+
+<mat-toolbar class="toolbar" *ngIf="user" dir="ltr" layout-align="center center">
+  <mat-toolbar-row class="toolbar-row">
+
+    <span routerLink="/" class="logo" fxHide.lt-md="true"> <img src="/assets/withoutsentance.png" class="logo"> </span>
+
+    <span class="example-spacer"></span>
+
+    <span *ngIf="days" class="pa"> נשאר לך עוד {{days}} ימים לסיום החבילה </span>
+    <span *ngIf="!days" class="pa"> לא קיימת חבילה </span>
+
+    <!--div fxShow="true" fxHide.lt-md="true" class="mat-toolbar-tools"-->
+    <div fxShow="true" class="mat-toolbar-tools" fxHide.lt-md="true" >
+
+      <button  (click)="signOut()"  routerLink="/login" class="toolbar_button" mat-button>
+        צא<!--i class="material-icons">highlight_off</i-->
+        <span class="glyphicon glyphicon-log-out" style="width: 24px; height: 24px; margin: 5px;"></span>
+      </button>
+
+      <button routerLink="/about"     routerLinkActive="class1"         class="toolbar_button" mat-button>
+        אודות <i class="material-icons">info</i>
+      </button>
+
+      <button routerLink="/packages"     routerLinkActive="class1"           class="toolbar_button" mat-button>
+        חבילות  <i class="material-icons">credit_card</i>
+      </button>
+
+      <button routerLink="/find_me_apartment"  routerLinkActive="class1"  class="toolbar_button" mat-button>
+        מצא דירה   <i class="material-icons" style="margin-right: 3%;">home</i>
+      </button>
+
+      <button routerLink="/alerts"  routerLinkActive="class1"  class="toolbar_button" mat-button>
+        ההתראות שלי   <i class="material-icons" style="margin-right: 3%;">notifications_active</i>
+      </button>
+
+      <!--button routerLink="/search_apartment"  routerLinkActive="class1"   class="toolbar_button" mat-button>
+        חפש   <i class="material-icons">search</i>
+      </button-->
+
+
+    </div>
+
+    <!--div fxShow="true" fxHide.gt-sm="true"-->
+    <div fxShow="true" class="mat-toolbar-tools" fxHide.gt-sm="true">
+
+      <button mat-button (click)="drawer.toggle()" style="display: none">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <button (click)="signOut()"  routerLink="/login"   routerLinkActive="class1"  class="toolbar_button_small" mat-button>
+        <span class="glyphicon glyphicon-log-out"></span>
+        <br>
+        צא
+
+      </button>
+
+      <button routerLink="/about"     routerLinkActive="class1"  class="toolbar_button_small" mat-button>
+        <i class="material-icons" style="margin-right: 3%;">info</i>
+        <br>
+        אודות
+
+      </button>
+
+      <button routerLink="/packages"     routerLinkActive="class1"  class="toolbar_button_small" mat-button>
+        <i class="material-icons" style="margin-right: 3%;">credit_card</i>
+        <br>
+        חבילות
+
+      </button>
+
+      <button routerLink="/find_me_apartment"  routerLinkActive="class1"  class="toolbar_button_small" mat-button>
+        <i class="material-icons">home</i>
+        <br>
+        מצא דירה
+
+      </button>
+
+      <button routerLink="/alerts"  routerLinkActive="class1"  class="toolbar_button_small" mat-button>
+        <i class="material-icons">notifications_active</i>
+        <br>
+        התראות
+
+      </button>
+
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<span *ngIf="days" class="pa2"> נשאר לך עוד {{days}} ימים לסיום החבילה </span>
+<span *ngIf="!days" class="pa2"> לא קיימת חבילה </span>
+
+<mat-drawer-container class="example-container" autosize>
+
+  <mat-drawer #drawer class="example-sidenav" mode="over" align="end">
+    <div fxLayout="column" (click)="drawer.toggle()">
+
+      <button  (click)="signOut()"  routerLink="/login" class="toolbar_button" mat-button>
+        צא<!--i class="material-icons">highlight_off</i-->
+        <span class="glyphicon glyphicon-log-out" style="width: 24px; height: 24px; margin: 5px;"></span>
+      </button>
+
+      <button routerLink="/about"     routerLinkActive="class1"         class="toolbar_button" mat-button>
+        אודות <i class="material-icons">info</i>
+      </button>
+
+      <button routerLink="/packages"     routerLinkActive="class1"           class="toolbar_button" mat-button>
+        חבילות  <i class="material-icons">credit_card</i>
+      </button>
+
+      <button routerLink="/find_me_apartment"  routerLinkActive="class1"  class="toolbar_button" mat-button>
+        מצא דירה   <i class="material-icons" style="margin-right: 3%;">home</i>
+      </button>
+
+      <button routerLink="/alerts"  routerLinkActive="class1"  class="toolbar_button" mat-button>
+        ההתראות שלי   <i class="material-icons" style="margin-right: 3%;">notifications_active</i>
+      </button>
+
+      <!--button routerLink="/search_apartment"  routerLinkActive="class1"   class="toolbar_button" mat-button>
+        <i class="material-icons">search</i>חפש
+      </button-->
+
+    </div>
+
+  </mat-drawer>
+<!--
+  <router-outlet></router-outlet>
+-->
+</mat-drawer-container>
+
+

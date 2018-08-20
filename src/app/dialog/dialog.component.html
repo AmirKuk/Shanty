@@ -1,0 +1,11 @@
+<div style="text-align: center">
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>
+  <mat-icon>{{data.type}}</mat-icon>
+  <br>
+{{data.message}}
+</mat-dialog-content>
+<mat-dialog-actions style="width: 50%; margin: auto;">
+  <button mat-raised-button (click)="closeDialog()">אישור</button>
+</mat-dialog-actions>
+</div>

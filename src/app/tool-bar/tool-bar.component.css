@@ -1,0 +1,88 @@
+.toolbar {
+  background: rgba(191, 209, 235, 0.5);
+  color: rgb(63,94,165);
+  padding: 10px;
+  padding-left: 0px;
+  margin: auto;
+  #width: 50%;
+}
+
+.pa{
+  margin-right: 5%;
+  color: #0a0a84;
+}
+
+.pa2{
+  display: none;
+}
+
+
+@media(max-width: 650px) {
+  .material-icons {
+    font-size: 5vw;
+  }
+
+  .pa{
+    display: none;
+  }
+
+  .pa2{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    color: #0a0a84;
+  }
+
+}
+
+.toolbar-roew{
+  margin: auto;
+  width: 50%;
+}
+
+.class1{
+  color: white;
+  background: rgba(111, 138, 201, 0.82);
+}
+
+.mat-toolbar-row{
+  /*padding-right: 10%;
+  padding-left: 10%;
+  padding-left: 0;*/
+}
+
+.toolbar_button{
+  font-size: 110%;
+}
+
+.toolbar_button_small{
+  min-width: 50px !important;
+  width: 18vw;
+  padding: 1vw;
+  font-size: 4vw;
+}
+
+.logo{
+  font-size: 130%;
+
+}
+
+img.logo{
+ /* max-width: 300px;
+  width: 80%;
+  height: 80%;
+  min-width: 240px;
+*/
+  margin: 60px;
+  max-width: 145px;
+  padding-top: 18px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+

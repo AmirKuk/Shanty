@@ -1,0 +1,54 @@
+<mat-card class="test">
+
+  <mat-card-content *ngIf="!user" class="card text-center">
+    <h6 >
+      <span class="logo"> <img src="assets\Final1_transparent.png" class="logo"> </span>
+    </h6>
+    <div class="card-block">
+      <h4 class="card-title">עוד רגע ונמצא לך דירה</h4>
+      <p class="card-text"></p>
+    </div>
+    <div class="card-block" style="padding: 20px;">
+      <button class="btn btn-block btn-social btn-google" (click)="signInWithGoogle()" style="font-size: 10.3pt;min-height: 35px;width: 225px;">
+        <span class="fa fa-google"></span>
+        <span class="button_text">התחבר באמצעות Google</span>
+      </button>
+      <button class="btn btn-block btn-social btn-facebook" (click)="signInWithFB()" style="font-size: 10.3pt;min-height: 35px;width: 225px;margin-bottom: 10px;">
+        <span class="fa fa-facebook"></span>
+        <span class="button_text">התחבר באמצעות Facebook</span>
+      </button>
+      <span>
+        אין לך מה לדאוג😉, אנחנו לא נשתמש בפרטיך האישיים ולא נפרסם שום דבר עם פרטיך
+      </span>
+    </div>
+
+  </mat-card-content>
+  <!--
+  <div *ngIf="user" class="card text-center">
+    <h6 class="card-header">
+      Social Login Demo
+    </h6>
+
+    <div class="card-block"></div>
+    <img class="card-img-top img-responsive photo" src="{{ user.photoUrl }}">
+    <div class="card-block">
+      <h4 class="card-title"> {{ user.name }}</h4>
+      <p class="card-text">   {{ user.email }}</p>
+      <p class="card-text">   {{ user.provider }}</p>
+      <p class="card-text">   {{ user.id }}</p>
+      <p class="card-text">   {{ user.email }}</p>
+      <p class="card-text">   {{ user.name }}</p>
+      <p class="card-text">   {{ user.photoUrl }}</p>
+      <p class="card-text">   {{ user.firstName }}</p>
+      <p class="card-text">   {{ user.lastName }}</p>
+      <p class="card-text">   {{ user.authToken }}</p>
+      <p class="card-text">   {{ user.idToken }}</p>
+
+    </div>
+    <div class="card-block">
+      <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+    </div>
+
+  </div>
+-->
+</mat-card>

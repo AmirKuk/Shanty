@@ -1,0 +1,75 @@
+<mat-card class="hovercard" style="max-height: 800px;" [class.hovercard]="mouseOvered || show_data"
+          (mouseover)="mouseOvered=true"
+          (mouseout)="mouseOvered=false">
+  <mat-card-title style="font-size: 15px; text-align: left;">
+    <div style="display: inline-block; width: 60%; padding-right: 20px; text-align: right;">
+      <mat-icon matTooltip="בקרוב פרטים נוספים על האיזור,אוכלוסיה,ממוצעי שכר באיזור ועוד" style="cursor: pointer;">info</mat-icon>
+      <mat-icon matTooltip="בקרוב מה הקהילה חושבת על הבית,האיזור,השותפים,הבניין,בעל הדירה ועוד" style="cursor: pointer; margin-right:15px">help</mat-icon>
+    </div>
+    <div style="display: inline-block; width: 40%;">
+      {{data['Publish_date']|date: "dd/MM/yyyy HH:mm"}}
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+      <div class="input-row"  fxLayout="row" fxLayout.lt-md="column" dir="rtl">
+
+        <div fxFlex="45%" (click)="show_info()">
+          <h3 style="color: #4760e2;" mat-line *ngIf="data['Price']; else no_price">
+            {{data['Price']}} ש"ח
+          </h3>
+          <ng-template #no_price>
+          <h3 mat-line >
+            מחיר לא קיים
+          </h3>
+          </ng-template>
+          <h4 mat-line *ngIf="data['Room_number']; else no_rooms">
+            {{data['Room_number']}}
+            חדרים
+          </h4>
+
+          <ng-template #no_rooms>
+          <h4 mat-line>
+            כמות חדרים לא קיימת
+          </h4>
+          </ng-template>
+
+          <h4 mat-line *ngIf="data['Ground']">
+            דירת קרקע
+          </h4>
+
+          <div *ngFor="let key of objectKeys(data)">
+            <div *ngIf="data[key] != null && key != 'photos' && translate[key] != null">
+              <span *ngIf="key == 'enter_date'"> {{translate[key]}} : {{data[key]|date: "dd/MM/yyyy"}}</span>
+              <span *ngIf="['_id','Contact','content','Room_number','Price','enter_date','Phone','Ground','Publish_date','Type'].indexOf(key)==-1"> {{translate[key]}} : {{data[key]}}</span>
+              <span *ngIf="key == 'Type'">{{translate[key]}} : {{translate[data[key]]}}</span>
+              <span *ngIf="key == 'Size'"> מ"ר </span>
+            </div>
+          </div>
+          <textarea matInput *ngIf="show_data" rows="10" disabled>{{data['content']}}</textarea>
+        </div>
+
+        <div fxFlex="55%">
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        </div>
+      </div>
+
+    <mat-action-row fxLayout="row" fxLayout.lt-md="column">
+      <button mat-button class="action-data mat-primary" (click)="copyText()">
+        <mat-icon>link</mat-icon>
+        העתק לינק
+
+      </button>
+      <span class="action-data" *ngIf="data['Phone']">
+      <mat-icon>phone</mat-icon>
+        {{data['Phone']}}
+
+      </span>
+      <span class="action-data">
+        <mat-icon>person</mat-icon>
+        {{data['Contact']}}
+
+      </span>
+    </mat-action-row>
+  </mat-card-content>
+
+</mat-card>

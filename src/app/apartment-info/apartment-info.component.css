@@ -1,0 +1,78 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
+mat-card {
+  max-width: 850px;
+  margin: 2em auto;
+  text-align: right;
+}
+mat-card-content{
+  cursor: pointer;
+}
+
+textarea{
+  background-color: white !important;
+  border-radius: 5px;
+  padding: 15px;
+  resize: none;
+  color: black !important;
+  width: 95%;
+  margin: 10px 0px 20px 10px;
+}
+
+.hovercard{
+  background-color: #7e9cb736;
+}
+
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding-top: 2px;
+}
+
+.more {
+  background: rgba(0, 0, 0, .7);
+  cursor: pointer;
+  color: #fff;
+  padding-top: 4px;
+  height: 68px;
+  position: absolute;
+  text-align: center;
+  width: 72px;
+}
+
+.apt-img {
+  max-width: 30%;
+}
+
+.my-app-custom-plain-container-row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.my-app-custom-plain-container-row .my-app-custom-image-row {
+  cursor: pointer;
+  height: auto;
+  margin-right: 2px;
+  width: 72px;
+}
+.my-app-custom-plain-container-row .my-app-custom-image-row.after {
+  border-top: 2px;
+  cursor: pointer;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.action-data{
+  padding: 10px;
+}
