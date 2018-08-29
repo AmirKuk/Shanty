@@ -11,3 +11,7 @@
 .mat-button{
   outline: none !important;
 }
+
+.mat-raised-button{
+  outline: none !important;
+}

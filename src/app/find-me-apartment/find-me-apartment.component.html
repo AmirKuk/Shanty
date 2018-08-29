@@ -8,22 +8,22 @@
       <div class="price data" fxLayout="row">
         <span class="symbole" style="font-size: x-large;padding-top: 20px;">₪</span>
         <mat-form-field>
-          <input matInput type="number" placeholder="ממחיר" formControlName="Price_min" step="10">
+          <input matInput type="number" min="0" placeholder="ממחיר" formControlName="Price_min" step="10">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" placeholder="עד מחיר" formControlName="Price_max" step="10">
+          <input matInput type="number" min="0" placeholder="עד מחיר" formControlName="Price_max" step="10">
         </mat-form-field>
       </div>
 
       <div class="rooms data" fxLayout="row">
         <mat-icon class="symbole">meeting_room</mat-icon>
         <mat-form-field>
-          <input matInput type="number" formControlName="Room_number_min" placeholder="מחדרים" matTooltip="מס' חדרים מינימלי" step="10">
+          <input matInput type="number" min="0" formControlName="Room_number_min" placeholder="מחדרים" matTooltip="מס' חדרים מינימלי" step="1">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" formControlName="Room_number_max" placeholder="עד חדרים" matTooltip="מס' חדרים מקסימלי" step="10">
+          <input matInput type="number" min="0" formControlName="Room_number_max" placeholder="עד חדרים" matTooltip="מס' חדרים מקסימלי" step="1">
         </mat-form-field>
       </div>
 
@@ -60,35 +60,32 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <!--mat-radio-group formControlName="Type">
-          <mat-radio-button *ngFor="let state of aprt_type" [value]="state" style="padding-left: 5px;">{{translate[state]}}</mat-radio-button>
-        </mat-radio-group -->
       </div>
 
-    <mat-card-content>
-      <div class="more data" fxLayout="column" style="margin: 10px; height: auto !important;">
-        <button mat-button class="mat-primary" style="padding: 20px; width: 100% !important; max-width: 300px; border-radius: 25px;" (click)="more()">
+
+      <div class="more data" fxLayout="column" style="max-width: 180px; height: auto !important;">
+        <button mat-button class="mat-primary" style="padding: 16px; border-radius: 25px;" (click)="more()">
           {{show}}           אפשרויות מתקדמות
         </button>
       </div>
-    </mat-card-content>
+
     </div>
     <div *ngIf="more_options" fxLayout="row" fxLayout.lt-md="column">
       <div fxLayout="row" class="data">
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker1" placeholder="מכניסה לדירה" formControlName="enter_date_min">
+          <input matInput [matDatepicker]="picker1" placeholder="מ ת.כניסה" formControlName="enter_date_min">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker1></mat-datepicker>
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker2" placeholder="עד כניסה לדירה" formControlName="enter_date_max">
+          <input matInput [matDatepicker]="picker2" placeholder="עד ת.כניסה" formControlName="enter_date_max">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker2></mat-datepicker>
         </mat-form-field>
       </div>
 
-      <div fxLayout="row" class="data" style="padding: 30px;" *ngIf="more_options">
+      <div fxLayout="row" class="data" style="padding: 27.5px;  font-size: smaller;" *ngIf="more_options">
         <mat-radio-group formControlName="Ground">
           <mat-radio-button style="padding-left: 5px;" value="false">קומות</mat-radio-button>
           <mat-radio-button style="padding-left: 5px;" value="true">קרקע</mat-radio-button>
@@ -98,11 +95,11 @@
 
       <div class="price data" fxLayout="row" *ngIf="more_options">
         <mat-form-field>
-          <input matInput type="number" formControlName="Size_min" placeholder="מגודל" step="5">
+          <input matInput type="number" min="0" formControlName="Size_min" placeholder="מגודל" step="5">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" formControlName="Size_max" placeholder="עד גודל" step="5">
+          <input matInput type="number" min="0" formControlName="Size_max" placeholder="עד גודל" step="5">
         </mat-form-field>
       </div>
 
@@ -117,16 +114,25 @@
 
     </div>
   </mat-card-content>
-
+  <span style="color: red" *ngIf="error.length > 0"> {{error}} </span>
+  <br *ngIf="error.length > 0">
   <mat-card-actions style="display: inline-flex;">
     <div class="search data" style="margin: 10px;">
-      <button mat-button style="padding: 20px; outline: none;" (click)="getAlerts()">
+      <button *ngIf="days > 0" mat-button style="padding: 20px; outline: none;" (click)="getAlerts()">
+        <mat-icon>notifications_active</mat-icon>
+      </button>
+      <ng-template #tipContent2>אתה חייב לרכוש חבילה בכדי לקבל התראות</ng-template>
+      <button *ngIf="days <= 0 || days === undefined" mat-button style="padding: 20px;" [ngbTooltip]="tipContent2">
         <mat-icon>notifications_active</mat-icon>
       </button>
     </div>
 
     <div class="search data" style="margin: 10px;">
-      <button mat-button style="padding: 20px;" (click)="search()" [ngx-scroll-to]="'res'">
+      <button *ngIf="days > 0" mat-button style="padding: 20px;" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <ng-template #tipContent>אתה חייב לרכוש חבילה בכדי לחפש</ng-template>
+      <button *ngIf="days <= 0 || days === undefined"  mat-button style="padding: 20px;" [ngbTooltip]="tipContent">
         <mat-icon>search</mat-icon>
       </button>
     </div>
@@ -136,7 +142,16 @@
   <div *ngFor="let element of table_data">
     <app-apartment-info [aprtData]="element"> </app-apartment-info>
   </div>
-  <div *ngIf="table_data.length == 0" style="text-align: center;
+
+  <ngx-spinner
+    bdColor = "rgba(51, 51, 51, 0.8)"
+    size = "large"
+    color = "#fff"
+    type = "ball-spin-fade"
+  ></ngx-spinner>
+
+
+  <div *ngIf="showNoRe" style="text-align: center;
     padding-top: 10vh;
     font-size: 7vh;">
     <span>

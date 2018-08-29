@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -13,6 +13,9 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { ClipboardModule } from 'ngx-clipboard';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
@@ -33,8 +36,11 @@ import 'hammerjs'; // <------ mandatory dependency for angular-modal-gallery
 import 'mousetrap'; // <------ mandatory dependency for angular-modal-gallery
 import { ModalGalleryModule } from '@ks89/angular-modal-gallery';
 
+import { registerLocaleData } from '@angular/common';
+import localeHe from '@angular/common/locales/he'
 
 
+registerLocaleData(localeHe);
 // Configs
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -83,12 +89,17 @@ export function getAuthServiceConfigs() {
     NouisliderModule,
     ClipboardModule,
     ModalGalleryModule.forRoot(),
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    NgxSpinnerModule,
+    NgbModule
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
+    },
+    { provide: LOCALE_ID,
+      useValue: 'he'
     },
     AuthService,
     AuthGuardService,

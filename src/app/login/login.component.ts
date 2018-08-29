@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.re = params.returnUrl || 'find_me_apartment';
-        debugger;
+        //debugger;
       });
   }
 
@@ -56,11 +56,12 @@ export class LoginComponent implements OnInit {
               if(this.url){
                 this.dtserv.postTrial({id:this.user.id, url:this.url} ).subscribe(
                   data => {
-                    console.log(data)
+                    console.log(data);
+                    this.router.navigate([this.re]);
                     return true;
                     },
                   error =>{
-                    console.log(error)
+                    console.log(error);
                     return false;
                   }
                   );
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit {
           re = this.route.queryParams._value.returnUrl;
         }*/
 
-        this.router.navigate([this.re]);
+
       }
     });
   }

@@ -13,6 +13,11 @@ mat-card-content{
   cursor: pointer;
 }
 
+.mat-button:hover{
+  /*height: 27px;
+  margin-top: 6px;*/
+}
+
 textarea{
   background-color: white !important;
   border-radius: 5px;

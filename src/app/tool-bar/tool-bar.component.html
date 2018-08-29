@@ -1,16 +1,17 @@
 <!---->
-
 <mat-toolbar class="toolbar" *ngIf="user" dir="ltr" layout-align="center center">
   <mat-toolbar-row class="toolbar-row">
 
     <span routerLink="/" class="logo" fxHide.lt-md="true"> <img src="/assets/withoutsentance.png" class="logo"> </span>
 
+    <span *ngIf="days" class="pa">     {{ days == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+days+' ימים לחבילתך'}}</span>
+
+    <span *ngIf="user && days === 0" class="pa">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
+
+    <span *ngIf="user && (days < 0 || days === undefined)" class="pa"> לא קיימת חבילה </span>
+
     <span class="example-spacer"></span>
 
-    <span *ngIf="days" class="pa"> נשאר לך עוד {{days}} ימים לסיום החבילה </span>
-    <span *ngIf="!days" class="pa"> לא קיימת חבילה </span>
-
-    <!--div fxShow="true" fxHide.lt-md="true" class="mat-toolbar-tools"-->
     <div fxShow="true" class="mat-toolbar-tools" fxHide.lt-md="true" >
 
       <button  (click)="signOut()"  routerLink="/login" class="toolbar_button" mat-button>
@@ -34,14 +35,9 @@
         ההתראות שלי   <i class="material-icons" style="margin-right: 3%;">notifications_active</i>
       </button>
 
-      <!--button routerLink="/search_apartment"  routerLinkActive="class1"   class="toolbar_button" mat-button>
-        חפש   <i class="material-icons">search</i>
-      </button-->
-
 
     </div>
 
-    <!--div fxShow="true" fxHide.gt-sm="true"-->
     <div fxShow="true" class="mat-toolbar-tools" fxHide.gt-sm="true">
 
       <button mat-button (click)="drawer.toggle()" style="display: none">
@@ -88,8 +84,11 @@
 
 </mat-toolbar>
 
-<span *ngIf="days" class="pa2"> נשאר לך עוד {{days}} ימים לסיום החבילה </span>
-<span *ngIf="!days" class="pa2"> לא קיימת חבילה </span>
+<span *ngIf="user && days" class="pa2">    {{ days == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+days+' ימים לחבילך'}}</span>
+
+<span *ngIf="user && days === 0" class="pa2">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
+
+<span *ngIf="user && (days < 0 || days === undefined)" class="pa2"> לא קיימת חבילה </span>
 
 <mat-drawer-container class="example-container" autosize>
 

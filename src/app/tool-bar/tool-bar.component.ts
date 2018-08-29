@@ -13,6 +13,7 @@ export class ToolBarComponent implements OnInit {
   user: SocialUser;
   isCollapsed: boolean;
   days:number;
+  temp:any;
 
   constructor(private authService: AuthService, public router: Router, private dtserv: DataServService) {
     this.isCollapsed = true;
@@ -33,11 +34,18 @@ export class ToolBarComponent implements OnInit {
       if (id == null){
         //this.router.navigate(['login']);
       }
+
       this.dtserv.getPackage(id).subscribe(
         data => {
-          alert(data)
+          //debugger;
+          //alert(data)
+          this.temp = data;
+          //debugger;
+          this.days = this.temp.Expire_in;
+          //this.days = 0;
         }
       );
+
     });
 
   }

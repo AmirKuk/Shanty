@@ -1,37 +1,39 @@
+<h2 mat-dialog-title>
+  צור התראה
+</h2>
+<mat-dialog-content [formGroup]="form" style="height: 150px;">
 
-  <h2 mat-dialog-title>
-    צור התראה
-  </h2>
-  <mat-dialog-content [formGroup]="form">
+  <div class="amir_test">
 
-      <mat-checkbox class="example-margin"  value="true" formControlName="site_alerts" matTooltip="בקרוב">התראות באתר</mat-checkbox>
-
-    <div class="amir_test">
-
-          <mat-checkbox formControlName="Enable_phone" value="true">
-          </mat-checkbox>
-
-      <mat-form-field fxFlex >
-        <input matInput  type="text"  placeholder="טלפון" formControlName="Phone">
-      </mat-form-field>
-    </div>
-    <div class="amir_test">
-
-        <mat-checkbox formControlName="Enable_email" value="ture">
+        <mat-checkbox formControlName="Enable_phone" value="true">
         </mat-checkbox>
 
-      <mat-form-field fxFlex>
-        <input matInput  type="text"  placeholder="Email" formControlName="Email">
-      </mat-form-field>
-    </div>
+    <mat-form-field fxFlex >
+      <input matInput  type="text"  placeholder="טלפון" formControlName="Phone">
+    </mat-form-field>
+  </div>
+  <div class="amir_test">
 
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">
-      ביטול
-    </button>
-    <button mat-button class="mat-primary" (click)="save()">
-      קבל התראות
-    </button>
+      <mat-checkbox formControlName="Enable_email" value="ture">
+      </mat-checkbox>
 
-  </mat-dialog-actions>
+    <mat-form-field fxFlex>
+      <input matInput  type="text"  placeholder="Email" formControlName="Email">
+    </mat-form-field>
+  </div>
+
+  <mat-checkbox class="example-margin"  value="true" formControlName="site_alerts" matTooltip="בקרוב">התראות באתר</mat-checkbox>
+  <br *ngIf="showReq">
+  <span style="color: red" *ngIf="showReq"> יש לסמן באילו דרכים תרצה לקבל התראות </span>
+  <br *ngIf="showPhoneReq">
+  <span style="color: red" *ngIf="showPhoneReq"> אנא הכנס מספר טלפון </span>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">
+    ביטול
+  </button>
+  <button mat-button class="mat-primary" (click)="save()">
+    קבל התראות
+  </button>
+
+</mat-dialog-actions>

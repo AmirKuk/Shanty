@@ -77,6 +77,11 @@ export class ApartmentInfoComponent implements OnInit {
 
   }
 
+  openMassage(){
+    window.open(this.data.Messanger_link);
+    //window.open( "https://www.facebook.com/messanger/t/130172107903565");
+  }
+
   copyText(){
 
     let selBox = document.createElement('textarea');

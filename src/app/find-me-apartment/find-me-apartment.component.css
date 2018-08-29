@@ -1,5 +1,12 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+:host ::ng-deep .custom-spinner-template {
+  height: 50% !important;
+  width: 50% !important;
+  top: 26% !important;
+  left: 24% !important;
+}
+
 .searchber {
   background: #dfe8f5;
   flex-wrap: wrap;
@@ -10,6 +17,12 @@
   /*width: 100px;
   width: 10vmax;*/
   max-width: 65px;
+  font-size: smaller;
+  margin: 10px;
+}
+
+.searchber .date_picker{
+  max-width: 90px !important;
   font-size: smaller;
   margin: 10px;
 }

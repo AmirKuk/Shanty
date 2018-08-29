@@ -14,6 +14,8 @@ export interface DialogData {
 export class GetAlertsComponent implements OnInit {
 
   form: FormGroup;
+  showReq:boolean = false;
+  showPhoneReq:boolean =false;
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<GetAlertsComponent>,
@@ -28,7 +30,25 @@ export class GetAlertsComponent implements OnInit {
   }
 
   save() {
-    this.dialogRef.close(this.form.value);
+    //if(this.form.value)
+    if((this.form.value.Enable_phone == null ||
+        this.form.value.Enable_phone == false) &&
+      (this.form.value.Enable_email == null ||
+        this.form.value.Enable_email == false)){
+      this.showReq = true;
+      this.showPhoneReq = false;
+    }
+    else {
+      if(this.form.value.Enable_phone && this.form.value.Phone == ""){
+        this.showReq = false;
+        this.showPhoneReq = true;
+      }
+      else{
+        //debugger;
+        this.dialogRef.close(this.form.value);
+      }
+    }
+
   }
 
   ngOnInit() {

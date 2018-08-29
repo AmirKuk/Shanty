@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataServService } from '../data-serv/data-serv.service';
 import { SocialUser, AuthService } from "angularx-social-login";
 import { Router } from '@angular/router';
@@ -7,6 +7,9 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { GetAlertsComponent } from '../get-alerts/get-alerts.component';
 import { MoreOptionsComponent } from '../more-options/more-options.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
+
 
 const translate = {
   'רחובות' :'Street'     ,
@@ -33,7 +36,7 @@ const translate = {
   "sablet": "סבלט",
   "Package has been expired":"החבילה פגה תוקף קנה חבילה חדשה",
   "Search already exists": "החיפוש כבר קיים",
-  "You have reached your search limit":"עברתה את כמות החיפושים האפשריים",
+  "You have reached your search limit":"עברת את כמות החיפושים המותרת בחבילתך",
 };
 
 @Component({
@@ -57,11 +60,22 @@ export class FindMeApartmentComponent implements OnInit {
   citys:string[] = ['באר שבע'];
   objectKeys = Object.keys;
   get_alerts = true;
+  showNoRe:boolean = false;
+
+  temp:any;
+  days:number;
 
   table_data: any = [];
 
+  error: string = "";
 
-  constructor(private router: Router, private fb: FormBuilder, private dtserv: DataServService, private authService: AuthService, public dialog: MatDialog){ }
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private dtserv: DataServService,
+              private authService: AuthService,
+              public dialog: MatDialog,
+              private spinner: NgxSpinnerService,
+              private _scrollToService: ScrollToService){ }
 
   more2(): void {
     const dialogRef = this.dialog.open(MoreOptionsComponent, {
@@ -96,7 +110,7 @@ export class FindMeApartmentComponent implements OnInit {
 
   openGetAlerts(data): void {
     const dialogRef = this.dialog.open(GetAlertsComponent, {
-      width: '300px',
+      width: '400px',
       data: data
     });
 
@@ -107,6 +121,7 @@ export class FindMeApartmentComponent implements OnInit {
 
   postAlert(parms){
     let post_s = Object.assign({}, this.contactForm.value, parms);
+    //debugger;
     if (parms) {
       for (var i in post_s) {
 
@@ -130,7 +145,7 @@ export class FindMeApartmentComponent implements OnInit {
 
       this.dtserv.postSeerch(post_s).subscribe(
           data => {
-            this.openDialog({message: "עידכוני דירות בדרך אליך", title: "נשמר בהצלחה", type: "sucsess"});
+            this.openDialog({message: "עידכוני דירות כבר בדרך אליך", title: "נשמר בהצלחה", type: "sucsess"});
             return true;
           },
           error => {
@@ -181,7 +196,9 @@ export class FindMeApartmentComponent implements OnInit {
   }
 
   getAlerts(){
-    this.openGetAlerts({email:localStorage.getItem("email")});
+    if (this.validate()) {
+      this.openGetAlerts({email: localStorage.getItem("email")});
+    }
   }
 
   getApartments(params){
@@ -191,7 +208,7 @@ export class FindMeApartmentComponent implements OnInit {
     delete to_send['is_deleted'];
 
     for (var i in to_send){
-      if (to_send[i] == "" || to_send[i] == null || to_send[i] == "null"){
+      if (to_send[i] === "" || to_send[i] === null || to_send[i] === "null"){
         to_send[i] = null;
       }
 
@@ -207,10 +224,27 @@ export class FindMeApartmentComponent implements OnInit {
         delete to_send[i];
       }
     }
+    this.spinner.show();
+    this.table_data = [];
+    this.showNoRe = false;
     this.dtserv.getApartments(to_send).subscribe(
       data => {
         this.table_data = data;
+        this.spinner.hide();
+        if(this.table_data.length == 0){
+          this.showNoRe = true;
+        }
+
+        const config: ScrollToConfigOptions = {
+          target: 'res'
+        };
+
+        this._scrollToService.scrollTo(config);
         //this.searched = true;
+      },
+      error => {
+        this.spinner.hide();
+        this.table_data = [];
       }
     );
   }
@@ -246,24 +280,63 @@ export class FindMeApartmentComponent implements OnInit {
   //search(data){
   search() {
     //this.contactForm.patchValue(data);
-    this.getApartments(this.contactForm.value);
+    if (this.validate()) {
+      this.getApartments(this.contactForm.value);
+    }
+  }
+
+  validate(){
+    if (this.contactForm.value.Room_number_min && this.contactForm.value.Room_number_max){
+      if (this.contactForm.value.Room_number_min > this.contactForm.value.Room_number_max){
+        this.error ="הכנס מספר חדרים חוקי";
+        return false;
+      }
+    }
+    if (this.contactForm.value.Price_min && this.contactForm.value.Price_max){
+      if (this.contactForm.value.Price_min > this.contactForm.value.Price_max){
+        this.error ="הכנס מחיר חוקי";
+        return false;
+      }
+    }
+    if (this.contactForm.value.Size_min && this.contactForm.value.Size_max){
+      if (this.contactForm.value.Size_min > this.contactForm.value.Size_max){
+        this.error ="הכנס גודל חוקי";
+        return false;
+      }
+    }
+
+    if (this.contactForm.value.enter_date_min && this.contactForm.value.enter_date_max){
+      if (this.contactForm.value.enter_date_min > this.contactForm.value.enter_date_max){
+        this.error ="הכנס תאריך חוקי";
+        return false;
+      }
+    }
+
+    this.error = "";
+    return true;
   }
 
   ngOnInit() {
-    this.dtserv.getApartments({}).subscribe(
+
+    this.dtserv.getPackage(localStorage.getItem("id")).subscribe(
       data => {
-        this.table_data = data;
+        this.temp = data;
+        this.days = this.temp.Expire_in;
+        //this.days = 0;
       }
     );
 
-    /*
-    this.dtserv.getStreets().subscribe(
+    this.spinner.show();
+    this.dtserv.getApartments({}).subscribe(
       data => {
-        this.streets = data;
-        this.all_streets = data;
+        this.table_data = data;
+        this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.table_data = [];
       }
     );
-    */
 
     this.dtserv.getNeighborhoods().subscribe(
       data => {
@@ -303,7 +376,7 @@ export class FindMeApartmentComponent implements OnInit {
       city:['באר שבע'],
       Neighborhood:[""],
       Street:[""],
-      Room_number_min: [""],
+      Room_number_min: ["",[Validators.min(0)]],
       Room_number_max: [""],
       Price_min: [""],
       Price_max: [""],
