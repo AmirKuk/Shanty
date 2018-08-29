@@ -23,14 +23,6 @@ export class DataServService {
   }
 
   getApartments(params) {
-    /*var params_new = "";
-
-    for (var k in Object.keys(params)){
-
-      params_new += "?"+ Object.keys(params)[k] + "=" + params[Object.keys(params)[k]];
-    }*/
-
-    //return this.http.get(apiserver+'/Apartments'+params_new);
     return this.http.post(apiserver+'/Apartments',params,{ responseType: 'json' });
   }
 

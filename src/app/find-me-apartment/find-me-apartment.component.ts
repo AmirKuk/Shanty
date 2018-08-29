@@ -183,18 +183,6 @@ export class FindMeApartmentComponent implements OnInit {
     this.contactForm.patchValue({"Street":o});
   }
 
-  redirect(item) {
-    this.router.navigate(['./search_apartment/'+item["_id"]]);
-  }
-
-  getSearches() {
-   /* this.dtserv.getSearches(localStorage.getItem("id")).subscribe(
-      data => {
-        this.data = data;
-      }
-    );*/
-  }
-
   getAlerts(){
     if (this.validate()) {
       this.openGetAlerts({email: localStorage.getItem("email")});
@@ -356,7 +344,6 @@ export class FindMeApartmentComponent implements OnInit {
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      this.getSearches()
     });
 
     this.userinfoForm = this.fb.group({

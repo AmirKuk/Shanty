@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.re = params.returnUrl || 'find_me_apartment';
-        //debugger;
       });
   }
 
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    //console.log(user);
   }
 
   ngOnInit() {
@@ -72,15 +70,8 @@ export class LoginComponent implements OnInit {
             console.error("Error saving!");
             console.log(error);
             return false;
-            //return Observable.throw(error);
           }
         );
-        /*let re = 'find_me_apartment';
-        if (this.route.queryParams._value.returnUrl){
-          re = this.route.queryParams._value.returnUrl;
-        }*/
-
-
       }
     });
   }
