@@ -4,19 +4,23 @@
 
     <span routerLink="/" class="logo" fxHide.lt-md="true"> <img src="/assets/withoutsentance.png" class="logo"> </span>
 
-    <span *ngIf="days" class="pa">     {{ days == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+days+' ימים לחבילתך'}}</span>
+    <span *ngIf="staticDays != 'Expired'" class="pa">     {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילתך'}}</span>
 
-    <span *ngIf="user && days === 0" class="pa">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
+    <span *ngIf="user && staticDays == 'Expired'" class="pa"> לא נותרו ימים לחבילתך,
+      <a style="color: red" routerLink="/packages">
+      עדכן אותה כעת
+      </a>
+    </span>
 
-    <span *ngIf="user && (days < 0 || days === undefined)" class="pa"> לא קיימת חבילה </span>
+    <!--span *ngIf="user && (days < 0 || days === undefined)" class="pa"> לא קיימת חבילה </span-->
 
     <span class="example-spacer"></span>
 
     <div fxShow="true" class="mat-toolbar-tools" fxHide.lt-md="true" >
 
       <button  (click)="signOut()"  routerLink="/login" class="toolbar_button" mat-button>
-        צא<!--i class="material-icons">highlight_off</i-->
-        <span class="glyphicon glyphicon-log-out" style="width: 24px; height: 24px; margin: 5px;"></span>
+        צא<i class="material-icons">exit_to_app</i>
+        <!--span class="glyphicon glyphicon-log-out" style="width: 24px; height: 24px; margin: 5px;"></span-->
       </button>
 
       <button routerLink="/about"     routerLinkActive="class1"         class="toolbar_button" mat-button>
@@ -45,7 +49,8 @@
       </button>
 
       <button (click)="signOut()"  routerLink="/login"   routerLinkActive="class1"  class="toolbar_button_small" mat-button>
-        <span class="glyphicon glyphicon-log-out"></span>
+        <!--span class="glyphicon glyphicon-log-out"></span -->
+        <i class="material-icons" style="margin-right: 3%;">exit_to_app</i>
         <br>
         צא
 
@@ -84,11 +89,11 @@
 
 </mat-toolbar>
 
-<span *ngIf="user && days" class="pa2">    {{ days == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+days+' ימים לחבילך'}}</span>
+<span *ngIf="user && staticDays" class="pa2">    {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילך'}}</span>
 
-<span *ngIf="user && days === 0" class="pa2">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
+<span *ngIf="user && staticDays === 0" class="pa2">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
 
-<span *ngIf="user && (days < 0 || days === undefined)" class="pa2"> לא קיימת חבילה </span>
+<!--span *ngIf="user && (days < 0 || days === undefined)" class="pa2"> לא קיימת חבילה </span-->
 
 <mat-drawer-container class="example-container" autosize>
 

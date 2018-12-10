@@ -35,7 +35,7 @@ const translate = {
   "Mates": "שותפים",
   "sablet": "סבלט",
   "Package has been expired":"החבילה פגה תוקף קנה חבילה חדשה",
-  "Search already exists": "החיפוש כבר קיים",
+  "Search already exists": "כבר הגדרת התראה עבור חיפוש זה",
   "You have reached your search limit":"עברת את כמות החיפושים המותרת בחבילתך",
 };
 
@@ -56,16 +56,18 @@ export class FindMeApartmentComponent implements OnInit {
   show:string = "הצג";
   more_options: boolean = false;
 
-  aprt_type:string[]=["All","Rent","Mates","sablet"];
+  //aprt_type:string[]=["All","Rent","Mates","sablet"];
+  aprt_type:string[]=["All","Mates","sablet"];
   citys:string[] = ['באר שבע'];
   objectKeys = Object.keys;
   get_alerts = true;
   showNoRe:boolean = false;
 
   temp:any;
-  days:number;
+  days:any;
 
   table_data: any = [];
+  markId:string = "";
 
   error: string = "";
 
@@ -76,6 +78,16 @@ export class FindMeApartmentComponent implements OnInit {
               public dialog: MatDialog,
               private spinner: NgxSpinnerService,
               private _scrollToService: ScrollToService){ }
+
+  markIt(id){
+    if (this.markId == id){
+      this.markId = ""
+    }
+    else{
+      this.markId = id;
+    }
+    return true;
+  }
 
   more2(): void {
     const dialogRef = this.dialog.open(MoreOptionsComponent, {
@@ -99,7 +111,8 @@ export class FindMeApartmentComponent implements OnInit {
 
   openDialog(data): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
+      width: '350px',
+      height: '500px',
       data: data
     });
 
@@ -145,17 +158,22 @@ export class FindMeApartmentComponent implements OnInit {
 
       this.dtserv.postSeerch(post_s).subscribe(
           data => {
-            this.openDialog({message: "עידכוני דירות כבר בדרך אליך", title: "נשמר בהצלחה", type: "sucsess"});
+            this.openDialog({message: "עידכוני דירות כבר בדרך אליך", title: "נשמר בהצלחה", type: "done_outline"});
             return true;
           },
           error => {
+            debugger;
             console.error("Error saving!");
             console.log(error);
             let m =  "החיפוש שלך לא נשמר";
+            let t = "יש כאן בעיה"
             if (this.translate[error.error]){
-              m = this.translate[error.error]
+              m = this.translate[error.error];
+              if (error.error == "Search already exists"){
+                t = "שים לב"
+              }
             }
-            this.openDialog({message:m, title: "יש כאן בעיה", type: "error"});
+            this.openDialog({message:m, title: t, type: "error"});
             return false;
           });
     }
@@ -363,16 +381,16 @@ export class FindMeApartmentComponent implements OnInit {
       city:['באר שבע'],
       Neighborhood:[""],
       Street:[""],
-      Room_number_min: ["",[Validators.min(0)]],
-      Room_number_max: [""],
-      Price_min: [""],
-      Price_max: [""],
+      Room_number_min: ["",[Validators.min(0),Validators.max(999)]],
+      Room_number_max: ["",[Validators.min(0),Validators.max(999)]],
+      Price_min: ["",[Validators.min(0),Validators.max(99999)]],
+      Price_max: ["",[Validators.min(0),Validators.max(99999)]],
       Type: [""],
       Ground:[""],
       enter_date_min:[""],
       enter_date_max:[""],
-      Size_min: [""],
-      Size_max: [""],
+      Size_min: ["",[Validators.min(0),Validators.max(999)]],
+      Size_max: ["",[Validators.min(0),Validators.max(999)]],
       animals:[{value:null,disabled:true}],
       alivator:[{value:null,disabled:true}]
     });

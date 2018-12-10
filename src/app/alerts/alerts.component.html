@@ -1,15 +1,35 @@
+<!--figcaption *ngIf="!understood" style="text-align: center;
+    padding-top: 4vh;">
+
+    <span class="understood">
+      <i style="font-size:10px !important; cursor: pointer" (click)="closeAn()">X</i>
+  בדף זה תוכל לערוך את החיפושים עבורם בחרת לקבל התראה
+    </span>
+</figcaption-->
+<app-tool-bar></app-tool-bar>
+
+<ngb-alert *ngIf="!understood" [type]="'primary'" (close)="closeAn()" style="text-align: center;
+    margin-top: 4vh;
+    max-width: 530px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;">
+  בדף זה תוכל לערוך את החיפושים עבורם בחרת לקבל התראה
+</ngb-alert>
+
 <div [fxLayout]="'row wrap'" class="container">
+
   <ng-container *ngFor="let d of data">
       <app-alerts-row style="margin-top: 20px; margin-left: 10px" *ngIf="!d.is_deleted" [data]="d" (changed)="countChangedHandler($event)"></app-alerts-row>
   </ng-container>
 
   <div *ngIf="show_count == 0" style="text-align: center;
-    padding-top: 10vh;
-    font-size: 7vh;">
+    padding-top: 3vh;
+    font-size: 3vh;">
     <span>
-      לא קיימים חיפושים זמינים עבור <button routerLink="/find_me_apartment"  routerLinkActive="class1"  class="toolbar_button" mat-button>
-        למצא דירה   <i class="material-icons" style="margin-right: 3%;">home</i>
-      </button> בשביל חיפוש חדש
+      לא קיימות התראות , להגדרת התראה בהתאם לדרישותיך הכנס לעמוד <button routerLink="/find_me_apartment"  routerLinkActive="class1"  class="toolbar_button" mat-button>
+        מצא דירה   <i class="material-icons" style="margin-right: 3%;">home</i>
+      </button> והגדר התראה מתאימה
     </span>
   </div>
 </div>

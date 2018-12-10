@@ -1,13 +1,13 @@
-<mat-card class="hovercard" style="max-height: 800px;" [class.hovercard]="mouseOvered || show_data"
+<mat-card class="hovercard" style="/*max-height: 800px;*/" [class.hovercard]="mouseOvered || markIt()"
           (mouseover)="mouseOvered=true"
           (mouseout)="mouseOvered=false">
   <mat-card-title style="font-size: 15px; text-align: left;">
     <div style="display: inline-block; width: 60%; padding-right: 20px; text-align: right;">
-      <ng-template #tipContent>בקרוב פרטים נוספים על האיזור,אוכלוסיה,ממוצעי שכר באיזור ועוד</ng-template>
+      <ng-template #tipContent>בקרוב תדעו פרטים נוספים על הדירה, האיזור,האוכלוסיה ועוד</ng-template>
       <button class="info-aprt" mat-button  placement="left" [ngbTooltip]="tipContent" style="max-width: 24px !important;padding: 0; min-width: 0 !important;">
         <mat-icon>info</mat-icon>
       </button>
-      <ng-template #tipContent2>בקרוב מה הקהילה חושבת על הבית,האיזור,השותפים,הבניין,בעל הדירה ועוד</ng-template>
+      <ng-template #tipContent2>בקרוב תדעו מה הקהילה חושבת על האיזור,הבניין הבית,השותפים ועוד דברים שיעזרו לכם בהחלטתכם</ng-template>
       <button mat-button placement="left" [ngbTooltip]="tipContent2" style="max-width: 24px !important;margin-right: 15px;padding: 0; min-width: 0 !important;">
         <mat-icon >help</mat-icon>
       </button>
@@ -52,7 +52,7 @@
               <span *ngIf="key == 'Size'"> מ"ר </span>
             </div>
           </div>
-          <textarea matInput *ngIf="show_data" rows="7" disabled>{{data['content']}}</textarea>
+          <textarea matInput *ngIf="markIt()" rows="7" disabled>{{data['content']}}</textarea>
         </div>
 
         <div fxFlex="55%">
@@ -61,10 +61,16 @@
       </div>
 
     <mat-action-row fxLayout="row" fxLayout.lt-md="column">
-      <button mat-button class="action-data mat-primary" (click)="copyText()">
-        <mat-icon>link</mat-icon>
-        העתק לינק
 
+      <span class="action-data">
+        <mat-icon>person</mat-icon>
+        {{data['Contact']}}
+
+      </span>
+
+      <button *ngIf="data['Phone']" mat-button class="action-data mat-primary" (click)= callPhone()>
+        <mat-icon>phone</mat-icon>
+        {{data['Phone']}}
       </button>
 
 
@@ -73,16 +79,13 @@
         התחל שיחה
       </button>
 
-      <span class="action-data" *ngIf="data['Phone']">
-      <mat-icon>phone</mat-icon>
-        {{data['Phone']}}
+      <button mat-button class="action-data mat-primary" (click)="copyText()">
+        <mat-icon>link</mat-icon>
+        העתק לינק
 
-      </span>
-      <span class="action-data">
-        <mat-icon>person</mat-icon>
-        {{data['Contact']}}
+      </button>
 
-      </span>
+
     </mat-action-row>
   </mat-card-content>
 

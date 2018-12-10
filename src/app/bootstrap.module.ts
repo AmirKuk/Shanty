@@ -2,15 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  NgbTooltipModule
+  NgbTooltipModule,
+  NgbAlertModule
       } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
-      NgbTooltipModule
+      NgbTooltipModule,
+      NgbAlertModule
     ],
     exports: [
-      NgbTooltipModule
+      NgbTooltipModule,
+      NgbAlertModule
     ]
   })
 

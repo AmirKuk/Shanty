@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService , private dtserv: DataServService, public router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(res =>
       this.url = res.url
+
     );
 
     this.route
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.re = params.returnUrl || 'find_me_apartment';
+
       });
   }
 
@@ -52,19 +54,26 @@ export class LoginComponent implements OnInit {
         this.dtserv.postUser(user).subscribe(
           data => {
               if(this.url){
+                debugger;
                 this.dtserv.postTrial({id:this.user.id, url:this.url} ).subscribe(
                   data => {
+                    debugger;
                     console.log(data);
                     this.router.navigate([this.re]);
                     return true;
                     },
                   error =>{
                     console.log(error);
+                    debugger;
                     return false;
-                  }
-                  );
+                  });
               }
-            return true;
+              else {
+                debugger;
+                this.router.navigate([this.re]);
+                return true;
+              }
+
           },
           error => {
             console.error("Error saving!");

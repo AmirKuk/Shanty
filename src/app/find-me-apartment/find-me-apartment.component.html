@@ -1,3 +1,4 @@
+<app-tool-bar></app-tool-bar>
 <mat-card class="searchber">
   <!-- Title of an Card -->
   <mat-card-title>
@@ -8,22 +9,22 @@
       <div class="price data" fxLayout="row">
         <span class="symbole" style="font-size: x-large;padding-top: 20px;">₪</span>
         <mat-form-field>
-          <input matInput type="number" min="0" placeholder="ממחיר" formControlName="Price_min" step="10">
+          <input matInput type="number" min="0" placeholder="ממחיר" formControlName="Price_min" step="10" max="99999">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" min="0" placeholder="עד מחיר" formControlName="Price_max" step="10">
+          <input matInput type="number" min="0" placeholder="עד מחיר" formControlName="Price_max" step="10" max="99999">
         </mat-form-field>
       </div>
 
       <div class="rooms data" fxLayout="row">
         <mat-icon class="symbole">meeting_room</mat-icon>
         <mat-form-field>
-          <input matInput type="number" min="0" formControlName="Room_number_min" placeholder="מחדרים" matTooltip="מס' חדרים מינימלי" step="1">
+          <input matInput type="number" min="0" formControlName="Room_number_min" placeholder="מחדרים" matTooltip="מס' חדרים מינימלי" step="1" max="999">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" min="0" formControlName="Room_number_max" placeholder="עד חדרים" matTooltip="מס' חדרים מקסימלי" step="1">
+          <input matInput type="number" min="0" formControlName="Room_number_max" placeholder="עד חדרים" matTooltip="מס' חדרים מקסימלי" step="1" max="999">
         </mat-form-field>
       </div>
 
@@ -73,13 +74,13 @@
     <div *ngIf="more_options" fxLayout="row" fxLayout.lt-md="column">
       <div fxLayout="row" class="data">
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker1" placeholder="מ ת.כניסה" formControlName="enter_date_min">
+          <input matInput [matDatepicker]="picker1" placeholder="מ ת.כניסה" formControlName="enter_date_min" maxlength="10">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker1></mat-datepicker>
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field fxFlex class="date_picker">
-          <input matInput [matDatepicker]="picker2" placeholder="עד ת.כניסה" formControlName="enter_date_max">
+          <input matInput [matDatepicker]="picker2" placeholder="עד ת.כניסה" formControlName="enter_date_max" maxlength="10">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #picker2></mat-datepicker>
         </mat-form-field>
@@ -95,11 +96,11 @@
 
       <div class="price data" fxLayout="row" *ngIf="more_options">
         <mat-form-field>
-          <input matInput type="number" min="0" formControlName="Size_min" placeholder="מגודל" step="5">
+          <input matInput type="number" min="0" max="999" formControlName="Size_min" placeholder="מגודל" step="5">
         </mat-form-field>
         <mat-icon class="symbole">keyboard_backspace</mat-icon>
         <mat-form-field>
-          <input matInput type="number" min="0" formControlName="Size_max" placeholder="עד גודל" step="5">
+          <input matInput type="number" min="0" max="999" formControlName="Size_max" placeholder="עד גודל" step="5">
         </mat-form-field>
       </div>
 
@@ -122,7 +123,7 @@
         <mat-icon>notifications_active</mat-icon>
       </button>
       <ng-template #tipContent2>אתה חייב לרכוש חבילה בכדי לקבל התראות</ng-template>
-      <button *ngIf="days <= 0 || days === undefined" mat-button style="padding: 20px;" [ngbTooltip]="tipContent2">
+      <button *ngIf="days <= 0 || days == 'Expired'" mat-button style="padding: 20px;" [ngbTooltip]="tipContent2">
         <mat-icon>notifications_active</mat-icon>
       </button>
     </div>
@@ -132,7 +133,7 @@
         <mat-icon>search</mat-icon>
       </button>
       <ng-template #tipContent>אתה חייב לרכוש חבילה בכדי לחפש</ng-template>
-      <button *ngIf="days <= 0 || days === undefined"  mat-button style="padding: 20px;" [ngbTooltip]="tipContent">
+      <button *ngIf="days <= 0 || days == 'Expired'"  mat-button style="padding: 20px;" [ngbTooltip]="tipContent">
         <mat-icon>search</mat-icon>
       </button>
     </div>
@@ -140,9 +141,9 @@
 </mat-card>
 <div  id="res">
   <div *ngFor="let element of table_data">
-    <app-apartment-info [aprtData]="element"> </app-apartment-info>
+    <app-apartment-info [aprtData]="element" [markId]="markId" (click)="markIt(element._id)"> </app-apartment-info>
   </div>
-
++
   <ngx-spinner
     bdColor = "rgba(51, 51, 51, 0.8)"
     size = "large"

@@ -12,11 +12,24 @@ export class ToolBarComponent implements OnInit {
 
   user: SocialUser;
   isCollapsed: boolean;
-  days:number;
+  static days:any;
   temp:any;
 
   constructor(private authService: AuthService, public router: Router, private dtserv: DataServService) {
     this.isCollapsed = true;
+    let id = localStorage.getItem("id");
+
+    this.dtserv.getPackage(id).subscribe(
+      data => {
+        //debugger;
+        //alert(data)
+        this.temp = data;
+        //debugger;
+        ToolBarComponent.days = this.temp.Expire_in;
+        //debugger;
+        //this.days = 0;
+      }
+    );
   }
 
   signOut(): void {
@@ -27,6 +40,10 @@ export class ToolBarComponent implements OnInit {
 
   }
 
+  get staticDays(){
+    return ToolBarComponent.days;
+  }
+
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
@@ -35,16 +52,7 @@ export class ToolBarComponent implements OnInit {
         //this.router.navigate(['login']);
       }
 
-      this.dtserv.getPackage(id).subscribe(
-        data => {
-          //debugger;
-          //alert(data)
-          this.temp = data;
-          //debugger;
-          this.days = this.temp.Expire_in;
-          //this.days = 0;
-        }
-      );
+
 
     });
 

@@ -33,13 +33,18 @@ export class PackagesComponent implements OnInit {
     });
   }
 
-  //this.func = openDialog;
+  chenge_price(price): void{
+    console.log(this.finalAmount);
+    this.finalAmount = price;
+    this.initConfig();
+  }
 
   private initConfig(): void {
-    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Sandbox, {
+    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Production, {
       commit: true,
       client: {
-        sandbox: 'Af2EsATzGITeIWR8GkHGTh5CGSRC4x_1mSVaVUXjChOIcjU6o4wn_fEZWW4HuVIJF43o4I4VRsRJPQuJ'
+        sandbox: 'Af2EsATzGITeIWR8GkHGTh5CGSRC4x_1mSVaVUXjChOIcjU6o4wn_fEZWW4HuVIJF43o4I4VRsRJPQuJ',
+        production: 'Abyo_hJu9RFbH_Wr_vx-mmeg6SnIDQP03N0oM_Q15uKAmJUUfFRVMtE7w-xyTbvsn5gwiVMph2ADFt5f'
       },
       button: {
         label: 'paypal',

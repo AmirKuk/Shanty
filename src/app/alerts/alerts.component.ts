@@ -10,6 +10,7 @@ export class AlertsComponent implements OnInit {
 
   data: any;
   show_count: number;
+  understood:boolean = false;
 
   constructor(private dtserv: DataServService) { }
 
@@ -29,6 +30,10 @@ export class AlertsComponent implements OnInit {
     if(count){
       this.show_count--;
     }
+  }
+
+  closeAn(){
+    this.understood = !this.understood
   }
 
   ngOnInit() {

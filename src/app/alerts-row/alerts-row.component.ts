@@ -55,6 +55,7 @@ export class AlertsRowComponent implements OnInit {
 
   delete_alert(){
     this.data.is_deleted = true;
+    this.data.Active = false;
     this.changed.emit(true);
     this.dtserv.putSeerch(this.data).subscribe(
       data => {

@@ -34,6 +34,7 @@ const translate = {
 })
 export class ApartmentInfoComponent implements OnInit {
   @Input() aprtData: any;
+  @Input() markId: string;
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -44,7 +45,7 @@ export class ApartmentInfoComponent implements OnInit {
   data:any;
   objectKeys = Object.keys;
   translate = translate;
-  show_data: boolean = false;
+  show_data:boolean = false;
   mouseOvered:boolean = false;
   text:string;
 
@@ -59,6 +60,18 @@ export class ApartmentInfoComponent implements OnInit {
 
   show_info(){
     this.show_data = !this.show_data;
+  }
+  
+  markIt(){
+    if (this.aprtData){
+      if (this.markId == this.aprtData._id){
+        return true;
+      }
+    }
+    if (this.aprtId){
+      return true;
+    }
+    return false;
   }
 
   initdata(data){
@@ -81,6 +94,12 @@ export class ApartmentInfoComponent implements OnInit {
     window.open(this.data.Messanger_link);
     //window.open( "https://www.facebook.com/messanger/t/130172107903565");
   }
+
+  callPhone(){
+    window.open("tel:" + this.data['Phone']);
+  }
+
+
 
   copyText(){
 

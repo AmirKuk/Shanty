@@ -5,29 +5,29 @@
   <div class="price" fxLayout="row">
     <span class="symbole" style="font-size: x-large;">₪</span>
     <mat-form-field>
-      <input matInput type="number" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" placeholder="ממחיר" formControlName="Price_min" step="10">
+      <input matInput type="number" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" placeholder="ממחיר" formControlName="Price_min" step="10">
     </mat-form-field>
     <mat-icon class="symbole">keyboard_backspace</mat-icon>
     <mat-form-field>
-      <input matInput type="number" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" placeholder="עד מחיר" formControlName="Price_max" step="10">
+      <input matInput type="number" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" placeholder="עד מחיר" formControlName="Price_max" step="10">
     </mat-form-field>
   </div>
 
   <div class="rooms" fxLayout="row">
     <mat-icon class="symbole">meeting_room</mat-icon>
     <mat-form-field>
-      <input matInput type="number" formControlName="Room_number_min" placeholder="חדרים" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" step="10">
+      <input matInput type="number" formControlName="Room_number_min" placeholder="חדרים" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" step="10">
     </mat-form-field>
     <mat-icon class="symbole">keyboard_backspace</mat-icon>
     <mat-form-field>
-      <input matInput type="number" formControlName="Room_number_max" placeholder="חדרים" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" step="10">
+      <input matInput type="number" formControlName="Room_number_max" placeholder="חדרים" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" step="10">
     </mat-form-field>
   </div>
 
   <div class="type" fxLayout="row">
     <mat-form-field>
-      <mat-select formControlName="Type" placeholder="סוג" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף">
-        <mat-option matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" *ngFor="let state of aprt_type" [value]="state">
+      <mat-select formControlName="Type" placeholder="סוג" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה">
+        <mat-option matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" *ngFor="let state of aprt_type" [value]="state">
           {{tran[state]}}
         </mat-option>
       </mat-select>
@@ -37,7 +37,7 @@
   <div class="area" fxLayout="row">
     <mat-icon class="symbole">home</mat-icon>
     <mat-form-field style="margin-left: 15px;">
-      <mat-select formControlName="city" placeholder="עיר" matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" formControlName="city">
+      <mat-select formControlName="city" placeholder="עיר" matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" formControlName="city">
         <mat-option *ngFor="let state of citys" [value]="state">
           {{state}}
         </mat-option>
@@ -46,7 +46,7 @@
 
     <mat-form-field>
       <mat-select formControlName="Neighborhood" placeholder="שכונה" multiple>
-        <mat-option matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" *ngFor="let state of neighborhoods" [value]="objectKeys(state)[1]" disabled>
+        <mat-option matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" *ngFor="let state of neighborhoods" [value]="objectKeys(state)[1]" disabled>
           <ng-container *ngIf="objectKeys(state)[1]!='_id'">
             {{objectKeys(state)[1]}}
           </ng-container>
@@ -62,13 +62,13 @@
 
   <div fxLayout="row" *ngIf="more_options">
     <mat-form-field fxFlex class="date_picker">
-      <input matInput matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" [matDatepicker]="picker1" placeholder="מכניסה לדירה" formControlName="enter_date_min">
+      <input matInput matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" [matDatepicker]="picker1" placeholder="מ ת.כניסה" formControlName="enter_date_min">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker touchUi="true" #picker1></mat-datepicker>
     </mat-form-field>
     <mat-icon class="symbole">keyboard_backspace</mat-icon>
     <mat-form-field fxFlex class="date_picker">
-      <input matInput [matDatepicker]="picker2" placeholder="עד כניסה לדירה" formControlName="enter_date_max">
+      <input matInput [matDatepicker]="picker2" placeholder="עד ת.כניסה" formControlName="enter_date_max">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker touchUi="true" #picker2></mat-datepicker>
     </mat-form-field>
@@ -76,28 +76,28 @@
 
   <div fxLayout="row" style="padding: 35px;" *ngIf="more_options">
     <mat-radio-group formControlName="Ground">
-      <mat-radio-button matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" style="padding-left: 5px;" value="false">קומות</mat-radio-button>
-      <mat-radio-button matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" style="padding-left: 5px;" value="true">קרקע</mat-radio-button>
-      <mat-radio-button matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" style="padding-left: 5px;" value="">גמיש</mat-radio-button>
+      <mat-radio-button matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" style="padding-left: 5px;" value="false">קומות</mat-radio-button>
+      <mat-radio-button matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" style="padding-left: 5px;" value="true">קרקע</mat-radio-button>
+      <mat-radio-button matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" style="padding-left: 5px;" value="">גמיש</mat-radio-button>
     </mat-radio-group>
   </div>
 
   <div class="price" fxLayout="row" *ngIf="more_options">
     <mat-form-field>
-      <input matInput matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" type="number" formControlName="Size_min" placeholder="מגודל" step="5">
+      <input matInput matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" type="number" formControlName="Size_min" placeholder="מגודל" step="5">
     </mat-form-field>
     <mat-icon class="symbole">keyboard_backspace</mat-icon>
     <mat-form-field>
-      <input matInput matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" type="number" formControlName="Size_max" placeholder="עד גודל" step="5">
+      <input matInput matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" type="number" formControlName="Size_max" placeholder="עד גודל" step="5">
     </mat-form-field>
   </div>
 
   <div fxLayout="row" *ngIf="more_options">
     <section class="example-section" fxFlex>
-      <mat-checkbox matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" class="example-margin" formControlName="alivator">מעלית</mat-checkbox>
+      <mat-checkbox matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" class="example-margin" formControlName="alivator">מעלית</mat-checkbox>
     </section>
     <section class="example-section" fxFlex >
-      <mat-checkbox matTooltip="לא ניתן לעריכה,ניתן למחוק בסוף הדף" class="example-margin" formControlName="animals">בעלי חיים</mat-checkbox>
+      <mat-checkbox matTooltip="שדה זה לא ניתן לעריכה, ניתן למחוק התראה זו או להפוך אותה ללא זמינה" class="example-margin" formControlName="animals">בעלי חיים</mat-checkbox>
     </section>
   </div>
 
