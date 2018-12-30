@@ -59,7 +59,7 @@ export class AlertsRowComponent implements OnInit {
     this.changed.emit(true);
     this.dtserv.putSeerch(this.data).subscribe(
       data => {
-        this.openDialog({message: "ההתראה נמחקה", title: "נמחק בהצלחה", type: "sucsess"});
+        this.openDialog({title: "נמחק בהצלחה", type: "done_outline"});
         //alert(data);
       }
     );
@@ -76,7 +76,7 @@ export class AlertsRowComponent implements OnInit {
     }
     this.dtserv.putSeerch(this.data).subscribe(
       data => {
-        this.openDialog({message: m, title: "עודכן בהצלחה", type: "sucsess"});
+        this.openDialog({message: m, title: "עודכן בהצלחה", type: "done_outline"});
         //alert(data);
       }
     );

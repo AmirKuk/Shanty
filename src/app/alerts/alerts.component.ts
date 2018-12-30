@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServService } from '../data-serv/data-serv.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-alerts',
@@ -12,9 +13,10 @@ export class AlertsComponent implements OnInit {
   show_count: number;
   understood:boolean = false;
 
-  constructor(private dtserv: DataServService) { }
+  constructor(private dtserv: DataServService, private spinner: NgxSpinnerService) { }
 
   getSearches() {
+    this.spinner.show();
     this.dtserv.getSearches(localStorage.getItem("id")).subscribe(
       data => {
         this.data = data;
@@ -24,7 +26,9 @@ export class AlertsComponent implements OnInit {
             this.show_count--;
           }
         }
-      });}
+        this.spinner.hide();
+      });
+  }
 
   countChangedHandler(count: boolean) {
     if(count){

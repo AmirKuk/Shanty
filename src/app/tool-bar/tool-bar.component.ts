@@ -19,15 +19,19 @@ export class ToolBarComponent implements OnInit {
     this.isCollapsed = true;
     let id = localStorage.getItem("id");
 
+    this.getPackge(id);
+  }
+
+  getPackge(id){
     this.dtserv.getPackage(id).subscribe(
       data => {
-        //debugger;
-        //alert(data)
         this.temp = data;
-        //debugger;
         ToolBarComponent.days = this.temp.Expire_in;
-        //debugger;
-        //this.days = 0;
+      },
+      error => {
+        console.log(error);
+        return false;
+        //return Observable.throw(error);
       }
     );
   }
@@ -51,9 +55,6 @@ export class ToolBarComponent implements OnInit {
       if (id == null){
         //this.router.navigate(['login']);
       }
-
-
-
     });
 
   }

@@ -54,6 +54,11 @@ textarea{
   max-width: 30%;
 }
 
+.data-span{
+  float: right;
+  width: 19vh;
+}
+
 .my-app-custom-plain-container-row {
   align-items: center;
   display: flex;
@@ -79,5 +84,12 @@ textarea{
 }
 
 .action-data{
-  padding: 10px;
+  padding: 0.7vw;
+  text-align: center;
+}
+
+@media only screen and (max-width: 959px) {
+  .action-data {
+    width: 50%;
+  }
 }

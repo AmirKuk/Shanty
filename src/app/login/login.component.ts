@@ -50,26 +50,22 @@ export class LoginComponent implements OnInit {
         else {
           localStorage.setItem("email", "");
         }
-
         this.dtserv.postUser(user).subscribe(
           data => {
               if(this.url){
-                debugger;
                 this.dtserv.postTrial({id:this.user.id, url:this.url} ).subscribe(
                   data => {
-                    debugger;
                     console.log(data);
                     this.router.navigate([this.re]);
                     return true;
                     },
                   error =>{
                     console.log(error);
-                    debugger;
+                    this.router.navigate([this.re]);
                     return false;
                   });
               }
               else {
-                debugger;
                 this.router.navigate([this.re]);
                 return true;
               }
@@ -78,6 +74,7 @@ export class LoginComponent implements OnInit {
           error => {
             console.error("Error saving!");
             console.log(error);
+            this.router.navigate([this.re]);
             return false;
           }
         );

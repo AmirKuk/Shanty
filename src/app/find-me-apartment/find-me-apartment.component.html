@@ -122,7 +122,7 @@
       <button *ngIf="days > 0" mat-button style="padding: 20px; outline: none;" (click)="getAlerts()">
         <mat-icon>notifications_active</mat-icon>
       </button>
-      <ng-template #tipContent2>אתה חייב לרכוש חבילה בכדי לקבל התראות</ng-template>
+      <ng-template #tipContent2>יש לרכוש חבילה על מנת לקבל התראות</ng-template>
       <button *ngIf="days <= 0 || days == 'Expired'" mat-button style="padding: 20px;" [ngbTooltip]="tipContent2">
         <mat-icon>notifications_active</mat-icon>
       </button>
@@ -132,7 +132,7 @@
       <button *ngIf="days > 0" mat-button style="padding: 20px;" (click)="search()">
         <mat-icon>search</mat-icon>
       </button>
-      <ng-template #tipContent>אתה חייב לרכוש חבילה בכדי לחפש</ng-template>
+      <ng-template #tipContent>יש לרכוש חבילה על מנת לחפש</ng-template>
       <button *ngIf="days <= 0 || days == 'Expired'"  mat-button style="padding: 20px;" [ngbTooltip]="tipContent">
         <mat-icon>search</mat-icon>
       </button>
@@ -141,9 +141,10 @@
 </mat-card>
 <div  id="res">
   <div *ngFor="let element of table_data">
-    <app-apartment-info [aprtData]="element" [markId]="markId" (click)="markIt(element._id)"> </app-apartment-info>
+    <!--app-apartment-info [aprtData]="element" [markId]="markId" (click)="markIt(element._id)"> </app-apartment-info-->
+    <app-apartment-info [aprtData]="element" [markId]="markId" [test]="markIt" [check]="testIt" (hi)="markIt($event)"> </app-apartment-info>
   </div>
-+
+
   <ngx-spinner
     bdColor = "rgba(51, 51, 51, 0.8)"
     size = "large"

@@ -4,15 +4,16 @@
 
     <span routerLink="/" class="logo" fxHide.lt-md="true"> <img src="/assets/withoutsentance.png" class="logo"> </span>
 
-    <span *ngIf="staticDays != 'Expired'" class="pa">     {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילתך'}}</span>
+    <span *ngIf="staticDays != 'Expired' && staticDays != undefined" class="pa">
+      {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילתך'}}
+    </span>
 
-    <span *ngIf="user && staticDays == 'Expired'" class="pa"> לא נותרו ימים לחבילתך,
+    <span *ngIf="user && staticDays == 'Expired'" class="pa">
+      לא נותרו ימים לחבילתך,
       <a style="color: red" routerLink="/packages">
       עדכן אותה כעת
       </a>
     </span>
-
-    <!--span *ngIf="user && (days < 0 || days === undefined)" class="pa"> לא קיימת חבילה </span-->
 
     <span class="example-spacer"></span>
 
@@ -89,9 +90,16 @@
 
 </mat-toolbar>
 
-<span *ngIf="user && staticDays" class="pa2">    {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילך'}}</span>
+<span *ngIf="staticDays != 'Expired' && staticDays != undefined" class="pa2">
+  {{ staticDays == 1 ? 'נותר יום אחד לחבילתך' : 'נותרו '+staticDays+' ימים לחבילתך'}}
+</span>
 
-<span *ngIf="user && staticDays === 0" class="pa2">    נותרו <a style="color: red" routerLink="/packages"> 0 </a> ימים לחבילתך </span>
+<span *ngIf="user && staticDays == 'Expired'" class="pa2">
+      לא נותרו ימים לחבילתך,
+      <a style="color: red" routerLink="/packages">
+      עדכן אותה כעת
+      </a>
+</span>
 
 <!--span *ngIf="user && (days < 0 || days === undefined)" class="pa2"> לא קיימת חבילה </span-->
 

@@ -1,9 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import {
-  AccessibilityConfig, Action, AdvancedLayout, ButtonEvent, ButtonsConfig, ButtonsStrategy, ButtonType, Description, DescriptionStrategy, GalleryService,
-  DotsConfig, GridLayout, Image, ImageModalEvent, LineLayout, PlainGalleryConfig, PlainGalleryStrategy, PreviewConfig
-} from '@ks89/angular-modal-gallery';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataServService } from '../data-serv/data-serv.service';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
@@ -35,7 +30,9 @@ const translate = {
 export class ApartmentInfoComponent implements OnInit {
   @Input() aprtData: any;
   @Input() markId: string;
-
+  @Input() test: any;
+  @Input() check: any;
+  @Output() hi = new EventEmitter<boolean>();
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -59,16 +56,15 @@ export class ApartmentInfoComponent implements OnInit {
   }
 
   show_info(){
-    this.show_data = !this.show_data;
+    this.hi.emit(this.aprtData._id);
   }
   
   markIt(){
-    if (this.aprtData){
-      if (this.markId == this.aprtData._id){
-        return true;
-      }
+    if(this.aprtId){
+      return true;
     }
-    if (this.aprtId){
+
+    if(this.aprtData.mark){
       return true;
     }
     return false;
@@ -85,7 +81,6 @@ export class ApartmentInfoComponent implements OnInit {
           big: this.data.photos[i]
         });
     }
-
     this.text = "https://my-shanty.com/search_apartment/" + this.data._id;
 
   }
@@ -93,6 +88,14 @@ export class ApartmentInfoComponent implements OnInit {
   openMassage(){
     window.open(this.data.Messanger_link);
     //window.open( "https://www.facebook.com/messanger/t/130172107903565");
+  }
+
+  openWhatsapp(){
+    window.open('https://wa.me/?text='+this.text)
+  }
+
+  openFacebook(){
+    window.open('https://www.facebook.com/sharer/sharer.php?u='+this.text)
   }
 
   callPhone(){
@@ -123,13 +126,14 @@ export class ApartmentInfoComponent implements OnInit {
         width: '100%',
         height: '300px',
         thumbnails: false,
+        "imageArrowsAutoHide": true,
         imageAnimation: NgxGalleryAnimation.Slide
       },
       // max-width 800
       {
         breakpoint: 800,
         width: '100%',
-        height: '150px',
+        height: '200px',
         imagePercent: 80,
         thumbnailsPercent: 20,
         thumbnailsMargin: 20,
@@ -137,12 +141,11 @@ export class ApartmentInfoComponent implements OnInit {
       },
       // max-width 400
       {
+        //height: '200px',
         breakpoint: 400,
         preview: false
       }
     ];
-
-
 
     this.galleryImages = [
       {
@@ -171,25 +174,21 @@ export class ApartmentInfoComponent implements OnInit {
         big: 'https://lukasz-galka.github.io/ngx-gallery-demo/assets/img/5-big.jpeg'
       }
     ];
-
     if (!this.aprtData) {
       this.dtserv.getApartments({"_id": this.aprtId}).subscribe(
         data => {
           this.initdata(data);
+          this.aprtData = {mark: true};
         },
       error => {
-          console.error("Error saving!");
           console.log(error);
-
-          //this.openDialog({message:"החיפוש שלך לא נשמר",title:"יש כאן בעיה",type:"error"});
-          //this.getApartments(this.contactForm.value);
           return false;
         });
     }
     else {
       this.initdata(this.aprtData);
-
     }
+
   }
 
 

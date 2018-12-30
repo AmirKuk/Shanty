@@ -79,14 +79,24 @@ export class FindMeApartmentComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private _scrollToService: ScrollToService){ }
 
-  markIt(id){
+  markIt(id): void{
+    this.table_data.forEach(function (value) {
+      if(id == value._id){
+        value.mark = !value.mark;
+      }
+      else{
+        value.mark = false;
+      }
+    });
+  }
+
+  testIt(id): boolean {
     if (this.markId == id){
-      this.markId = ""
+      return true;
     }
     else{
-      this.markId = id;
+      return false;
     }
-    return true;
   }
 
   more2(): void {
@@ -112,7 +122,7 @@ export class FindMeApartmentComponent implements OnInit {
   openDialog(data): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '350px',
-      height: '500px',
+      //height: '500px',
       data: data
     });
 
@@ -158,7 +168,7 @@ export class FindMeApartmentComponent implements OnInit {
 
       this.dtserv.postSeerch(post_s).subscribe(
           data => {
-            this.openDialog({message: "עידכוני דירות כבר בדרך אליך", title: "נשמר בהצלחה", type: "done_outline"});
+            this.openDialog({message: "עידכוני דירות כבר בדרך אליך", title: "נשמר בהצלחה", type: "done_outline", show: true});
             return true;
           },
           error => {
@@ -173,7 +183,7 @@ export class FindMeApartmentComponent implements OnInit {
                 t = "שים לב"
               }
             }
-            this.openDialog({message:m, title: t, type: "error"});
+            this.openDialog({message:m, title: t, type: "error", show:true});
             return false;
           });
     }
@@ -236,6 +246,9 @@ export class FindMeApartmentComponent implements OnInit {
     this.dtserv.getApartments(to_send).subscribe(
       data => {
         this.table_data = data;
+        this.table_data.forEach(function (value) {
+          value.mark = false;
+        });
         this.spinner.hide();
         if(this.table_data.length == 0){
           this.showNoRe = true;
@@ -271,13 +284,13 @@ export class FindMeApartmentComponent implements OnInit {
     post_s['Active'] = data['checked'];
     this.dtserv.putSeerch(post_s).subscribe(
       data => {
-        this.openDialog({message:"החיפוש של עודכן",title:"עודכן בהצלחה",type:"sucsess"});
+        this.openDialog({message:"החיפוש שלך עודכן",title:"עודכן בהצלחה",type:"sucsess",show:true});
         return true;
       },
       error => {
         console.error("Error saving!");
         console.log(error);
-        this.openDialog({message:"החיפוש שלך לא עודכן",title:"יש כאן בעיה",type:"error"});
+        this.openDialog({message:"החיפוש שלך לא עודכן",title:"יש כאן בעיה",type:"error",show:true});
         return false;
       }
     );
@@ -318,6 +331,11 @@ export class FindMeApartmentComponent implements OnInit {
       }
     }
 
+    if(this.contactForm.status == "INVALID"){
+      this.error ="הכנס ערכים חוקיים";
+      return false;
+    }
+
     this.error = "";
     return true;
   }
@@ -336,6 +354,10 @@ export class FindMeApartmentComponent implements OnInit {
     this.dtserv.getApartments({}).subscribe(
       data => {
         this.table_data = data;
+
+        this.table_data.forEach(function (value) {
+          value.mark = false;
+        });
         this.spinner.hide();
       },
       error => {

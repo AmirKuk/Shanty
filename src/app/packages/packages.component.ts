@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, Inject  } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { PayPalConfig, PayPalEnvironment, PayPalIntegrationType } from 'ngx-paypal';
 import { DataServService } from '../data-serv/data-serv.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 
 declare let paypal: any;
@@ -22,7 +22,7 @@ export class PackagesComponent implements OnInit {
 
   public payPalConfig?: PayPalConfig;
 
-  openDialog(data): void {
+  openDialog(data,reload): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: data
@@ -30,7 +30,10 @@ export class PackagesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-    });
+      if (reload) {
+        location.reload();
+      }
+      });
   }
 
   chenge_price(price): void{
@@ -40,7 +43,7 @@ export class PackagesComponent implements OnInit {
   }
 
   private initConfig(): void {
-    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Production, {
+    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Sandbox, {
       commit: true,
       client: {
         sandbox: 'Af2EsATzGITeIWR8GkHGTh5CGSRC4x_1mSVaVUXjChOIcjU6o4wn_fEZWW4HuVIJF43o4I4VRsRJPQuJ',
@@ -56,14 +59,15 @@ export class PackagesComponent implements OnInit {
       },
       onPaymentComplete: (data, actions) => {
         data["id"] = localStorage.getItem("id");
+        //debugger;
         switch (this.finalAmount) {
-          case 10:
+          case 30:
             data["type"] = "Basic";
             break;
-          case 20:
+          case 60:
             data["type"] = "Premium";
             break;
-          case 30:
+          case 80:
             data["type"] = "Expert";
             break;
           default:
@@ -73,13 +77,12 @@ export class PackagesComponent implements OnInit {
         console.log('OnPaymentComplete');
         this.dtserv.postPackage(data).subscribe(
           data => {
-            this.openDialog({message:"הנתונים הוזנו בהצלחה",title:"הידד!",type:"sucsess"});
+            this.openDialog({message:"הנתונים הוזנו בהצלחה",title:"הידד!",type:"done_outline"},true);
 
             return true;
           },
           error => {
             console.error("Error saving!");
-            this.openDialog({message:"בעיה בשמירה",title:"יש כאן בעיה",type:"error"});
             console.log(error);
             return false;
             //return Observable.throw(error);
@@ -87,11 +90,13 @@ export class PackagesComponent implements OnInit {
       },
       onCancel: (data, actions) => {
         console.log('OnCancel');
-        this.openDialog({message:"הפעולה בוטלה",title:"יש כאן בעיה",type:"error"});
+        this.openDialog({message:"הפעולה בוטלה",title:"יש כאן בעיה",type:"error"},false);
+        //this.ref.detectChanges();
+
       },
       onError: (err) => {
         console.log('OnError');
-        this.openDialog({message:"יש בעיה paypal נסו שוב בעוד כמה רגעים",title:"יש כאן בעיה",type:"error"});
+        this.openDialog({message:"יש בעיה paypal נסו שוב בעוד כמה רגעים",title:"יש כאן בעיה",type:"error"},false);
         //alert("Get erorr try agin in few moments");
       },
       transactions: [{
@@ -103,7 +108,7 @@ export class PackagesComponent implements OnInit {
     });
   }
 
-  constructor( private dtserv: DataServService, public dialog: MatDialog) { }
+  constructor( private dtserv: DataServService, public dialog: MatDialog,private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.initConfig();

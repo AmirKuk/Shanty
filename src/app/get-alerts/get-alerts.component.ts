@@ -1,6 +1,6 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 export interface DialogData {
   email: string;
@@ -29,8 +29,14 @@ export class GetAlertsComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /*check_phone(num):boolean{
+    "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$"
+    return true;
+  }*/
+
   save() {
     //if(this.form.value)
+    debugger;
     if((this.form.value.Enable_phone == null ||
         this.form.value.Enable_phone == false) &&
       (this.form.value.Enable_email == null ||
@@ -39,7 +45,8 @@ export class GetAlertsComponent implements OnInit {
       this.showPhoneReq = false;
     }
     else {
-      if(this.form.value.Enable_phone && this.form.value.Phone == ""){
+      //if(this.form.value.Enable_phone && !this.check_phone(this.form.value.Phone)){
+      if(this.form.value.Enable_phone && this.form.status == "INVALID"){
         this.showReq = false;
         this.showPhoneReq = true;
       }
@@ -54,7 +61,7 @@ export class GetAlertsComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       Email:[this.data.email],
-      Phone:[""],
+      Phone:["",[Validators.minLength(10),Validators.pattern(/^05\d([-]{0,1})\d{7}$/)]],
       site_alerts:[{value:"",disabled:true}],
       Enable_phone:[],
       Enable_email:[]

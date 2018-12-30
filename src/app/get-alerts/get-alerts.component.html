@@ -9,7 +9,7 @@
         </mat-checkbox>
 
     <mat-form-field fxFlex >
-      <input matInput  type="text"  placeholder="טלפון" formControlName="Phone">
+      <input matInput  type="text"  placeholder="טלפון" formControlName="Phone" maxlength="10">
     </mat-form-field>
   </div>
   <div class="amir_test">
@@ -18,7 +18,7 @@
       </mat-checkbox>
 
     <mat-form-field fxFlex>
-      <input matInput  type="text"  placeholder="Email" formControlName="Email">
+      <input matInput  type="text"  placeholder="Email" formControlName="Email" maxlength="70">
     </mat-form-field>
   </div>
 
@@ -26,7 +26,7 @@
   <br *ngIf="showReq">
   <span style="color: red" *ngIf="showReq"> יש לסמן באילו דרכים תרצה לקבל התראות </span>
   <br *ngIf="showPhoneReq">
-  <span style="color: red" *ngIf="showPhoneReq"> אנא הכנס מספר טלפון </span>
+  <span style="color: red" *ngIf="showPhoneReq"> אנא הכנס מספר טלפון תקין </span>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">

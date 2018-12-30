@@ -2,18 +2,25 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content>
   <mat-icon>{{data.type}}</mat-icon>
-  <br>
-  <span *ngIf="data.type === 'done_outline' " >
-    עבור
-    <button routerLink="/alerts"  routerLinkActive="class1"  class="toolbar_button_small" (click)="closeDialog()" mat-button>
-    לדף ההתראות
-    </button>
-    בכדי לראות את ההתראות השמורות שלך
-  </span>
-  <br>
-{{data.message}}
+  <div *ngIf="data.title != 'נמחק בהצלחה'">
+    <br>
+    {{data.message}}
+    <br>
+    <!--span *ngIf="data.type === 'done_outline' || data.message === 'כבר הגדרת התראה עבור חיפוש זה' " -->
+
+    <span *ngIf="data.show">
+      עבור
+      <button routerLink="/alerts"  routerLinkActive="class1"  class="toolbar_button_small" (click)="closeDialog()" mat-button>
+      לדף ההתראות
+      </button>
+      בכדי לראות את ההתראות השמורות שלך
+    </span>
+
+    <br>
+  </div>
 </mat-dialog-content>
-<mat-dialog-actions style="width: 50%; margin: auto;">
-  <button mat-raised-button (click)="closeDialog()">אישור</button>
-</mat-dialog-actions>
+<!--mat-dialog-actions style="width: 30%; margin: auto;"-->
+  <mat-dialog-actions style="display: block;">
+    <button mat-raised-button (click)="closeDialog()">אישור</button>
+  </mat-dialog-actions>
 </div>
