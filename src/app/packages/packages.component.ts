@@ -43,7 +43,7 @@ export class PackagesComponent implements OnInit {
   }
 
   private initConfig(): void {
-    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Sandbox, {
+    this.payPalConfig = new PayPalConfig(PayPalIntegrationType.ClientSideREST, PayPalEnvironment.Production, {
       commit: true,
       client: {
         sandbox: 'Af2EsATzGITeIWR8GkHGTh5CGSRC4x_1mSVaVUXjChOIcjU6o4wn_fEZWW4HuVIJF43o4I4VRsRJPQuJ',

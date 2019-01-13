@@ -17,9 +17,9 @@
     </div>
   </mat-card-title>
   <mat-card-content>
-      <div class="input-row"  fxLayout="row" fxLayout.lt-md="column" dir="rtl">
+    <div class="input-row"  fxLayout="row" fxLayout.lt-md="column" dir="rtl">
 
-        <div fxFlex="45%" (click)="show_info()">
+        <div fxFlex="45%" style="padding-bottom: 30px;" (click)="show_info()">
           <h3 style="color: #4760e2;" mat-line *ngIf="data['Price']; else no_price">
             {{data['Price']}} ש"ח
           </h3>
@@ -46,10 +46,23 @@
 
           <div *ngFor="let key of objectKeys(data)">
             <div *ngIf="data[key] != null && key != 'photos' && translate[key] != null">
-              <span *ngIf="key == 'enter_date'" class="data-span" style="width: 30vh !important;">&#9733; {{translate[key]}} : {{data[key] == "מיידית" ? "מיידית" :  data[key] | date:"dd/MM/yyyy"}}</span>
-              <span *ngIf="['_id','Contact','content','Room_number','Price','enter_date','Phone','Ground','Publish_date','Type','Size'].indexOf(key)==-1" class="data-span">&#9733; {{translate[key]}} : {{data[key]}}</span>
-              <span *ngIf="key == 'Type' && data[key] != 'Rent'" class="data-span">&#9733; {{translate[key]}} : {{translate[data[key]]}}</span>
-              <span *ngIf="key == 'Size'" class="data-span">  &#9733; {{translate[key]}} : {{data[key]}} מ"ר</span>
+              <span *ngIf="key == 'enter_date'" class="data-span" style="">
+                <svg class="star"> </svg>
+                {{translate[key]}} : {{data[key] == "מיידית" ? "מיידית" :  data[key] | date:"dd/MM/yyyy"}}
+              </span>
+              <span *ngIf="['_id','Contact','content','Room_number','Price','enter_date','Phone','Ground','Publish_date','Type','Size'].indexOf(key)==-1" class="data-span">
+                <svg class="star"> </svg>
+                {{translate[key]}} : {{data[key]}}
+              </span>
+              <span *ngIf="key == 'Type' && data[key] != 'Rent'" class="data-span">
+                <svg class="star"> </svg>
+                {{translate[key]}} : {{translate[data[key]]}}
+              </span>
+              <span *ngIf="key == 'Size'" class="data-span">
+                <svg class="star"> </svg>
+                {{translate[key]}} : {{data[key]}}
+                מ"ר
+              </span>
             </div>
           </div>
           <textarea matInput *ngIf="aprtData.mark" rows="7" disabled>{{data['content']}}</textarea>

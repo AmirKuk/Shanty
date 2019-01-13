@@ -56,7 +56,7 @@ textarea{
 
 .data-span{
   float: right;
-  width: 19vh;
+  padding-left: 10px;
 }
 
 .my-app-custom-plain-container-row {
@@ -86,6 +86,16 @@ textarea{
 .action-data{
   padding: 0.7vw;
   text-align: center;
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis !important;
+}
+
+svg.star{
+  width: 12px;
+  height: 12px;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyOCAxMjg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNGRjUwNTA7fQoJLnN0MXtmaWxsOiNGRkZGRkY7fQoJLnN0MntmaWxsOiM5QjAyNzA7fQoJLnN0M3tmaWxsOiNGRkQ5NTI7fQoJLnN0NHtmaWxsOiNGRjlEMDA7fQoJLnN0NXtmaWxsOiNERkU4RjQ7fQoJLnN0NntmaWxsOiM1MkVGQkI7fQoJLnN0N3tmaWxsOiMzM0JDOEI7fQoJLnN0OHtmaWxsOiMwNzk1RkY7fQoJLnN0OXtmaWxsOiM1MDA1OTk7fQoJLnN0MTB7ZmlsbDojNEQyOEE4O30KCS5zdDExe2ZpbGw6IzM1REM4Njt9Cgkuc3QxMntmaWxsOiMyN0E4OEY7fQo8L3N0eWxlPjxnPjxwYXRoIGNsYXNzPSJzdDMiIGQ9Ik02OS40LDEwLjJsMTUsMzAuNWwzMy42LDQuOWMxLjUsNC43LDEuOCw1LjUsMy4zLDEwLjJMOTcsNzkuNWwtMzMsMjRsLTMwLjEsMTUuOGMtNC0yLjktNC43LTMuNC04LjctNi4zICAgTDMxLDc5LjVMNi42LDU1LjhjMS41LTQuNywxLjgtNS41LDMuMy0xMC4ybDMzLjYtNC45bDE1LTMwLjVDNjMuNiwxMC4yLDY0LjQsMTAuMiw2OS40LDEwLjJ6Ii8+PC9nPjxnPjxwb2x5Z29uIGNsYXNzPSJzdDQiIHBvaW50cz0iOTcsODAgNjQsODAgNjQsMTA0IDk0LDExOSAxMDMsMTEzICAiLz48L2c+PGc+PHJlY3QgY2xhc3M9InN0MSIgaGVpZ2h0PSIxMCIgd2lkdGg9IjEwIiB4PSI1NCIgeT0iNzAiLz48L2c+PC9zdmc+');
 }
 
 @media only screen and (max-width: 959px) {
